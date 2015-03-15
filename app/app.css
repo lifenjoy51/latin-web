@@ -1,30 +1,40 @@
-/* app css stylesheet */
-
-.menu {
-  list-style: none;
-  border-bottom: 0.1em solid black;
-  margin-bottom: 2em;
-  padding: 0 0 0.5em;
+.table{
+  display:table;
 }
 
-.menu:before {
-  content: "[";
+.tr{
+  display:table-row;
 }
 
-.menu:after {
-  content: "]";
+.td{
+  display:table-cell;
+}
+/********/
+/* word */
+/********/
+.word-top{
+
 }
 
-.menu > li {
-  display: inline;
+.word-question{
+  background-color : #CCDDFF;
+  margin : 2vh 5vw;
+  padding : 5vh 5vw;
 }
 
-.menu > li:before {
-  content: "|";
-  padding-right: 0.3em;
+.word-choices{
+
 }
 
-.menu > li:nth-child(1):before {
-  content: "";
-  padding: 0;
+.word-choices ol{
+  list-style-position: inside;
+  padding:0px;
+}
+
+.word-choices li{
+  background-color : #6699CC;
+  margin : 2vh 5vw;
+  height : 5vh;
+  line-height : 5vh;
+  padding : 0 2vh;
 }
