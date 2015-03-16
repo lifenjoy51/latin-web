@@ -1,17 +1,28 @@
-<div class="word-top table">
-  <div class="tr">
-    <div class="td">10.9.8.</div>
-    <div class="td">점수!</div>
+<div class="body">
+  <div class="word-top table">
+    <div class="tr">
+      <div class="td">
+        <div class="countdown">
+          <span>3</span>
+        </div>
+      </div>
+      <div class="td middle">
+      </div>
+      <div class="td">
+        <div class="score">
+          <span>1</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="word-question">
+    <p>{{question.content}}</p>
+  </div>
+  <div class="word-choices">
+    <ul>
+      <li ng-repeat="choice in question.choices" >
+        <p ng-click="choose(choice.id)">{{choice.text}}</p>
+      </li>
+    </ul>
   </div>
 </div>
-<div class="word-question">
-  <p>amo, amare, amavi, amatum</p>
-</div>
-<div class="word-choices">
-  <ol>
-    <li>주다.</li>
-    <li>조언하다.</li>
-    <li>가다.</li>
-  </ol>
-</div>
-<p>This is the partial for view 1.</p>

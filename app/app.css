@@ -9,32 +9,83 @@
 .td{
   display:table-cell;
 }
+
+.left{
+  text-align : left;
+}
+
+.right{
+  text-align : right;
+}
+
+.middle{
+  width:100%;
+}
+
+
 /********/
 /* word */
 /********/
+
+.body{
+  margin: 0 5vw;
+}
+
 .word-top{
 
 }
 
+.countdown{
+  background-color : #112233;
+  color : white;
+  width:5vh;
+  height:5vh;
+  line-height:5vh;
+  text-align:center;
+}
+
+.countdown p{
+  margin:auto;
+}
+
+.score{
+  background-color : #4488ee;
+  color : white;
+  width:5vh;
+  height:5vh;
+  line-height:5vh;
+  text-align:center;
+}
+
+.score p{
+  margin:auto;
+}
+
 .word-question{
   background-color : #CCDDFF;
-  margin : 2vh 5vw;
-  padding : 5vh 5vw;
+  margin : 2vh 0;
+  height: 30vh;
+  line-height : 30vh;
+  padding : 1vh 5vw;
 }
 
 .word-choices{
 
 }
 
-.word-choices ol{
-  list-style-position: inside;
+.word-choices ul{
   padding:0px;
 }
 
 .word-choices li{
+  list-style-type: none;
   background-color : #6699CC;
-  margin : 2vh 5vw;
-  height : 5vh;
-  line-height : 5vh;
-  padding : 0 2vh;
+  margin : 2vh 0;
+  padding : 2vh 2vw;
+}
+
+.word-choices li p{
+  height: 3vh;
+  line-height :3vh;
+  margin:0;
 }
