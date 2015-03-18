@@ -12,40 +12,40 @@ angular.module('latinApp.word', [
     controller: 'wordCtrl'
   });
 
+  //local storage
   localStorageServiceProvider.setPrefix('latinApp');
 }])
 
-.controller('wordCtrl', ['$scope', 'localStorageService',
-function($scope, localStorageService) {
+.controller('wordCtrl', ['$scope', 'localStorageService', '$http',
+function($scope, localStorageService, $http) {
 
   //문제와 정답이 함께 들어가 있다.
   //문제는 질문과 보기, 답으로 이루어져 있다.
-
-  $scope.question = {
-    content : 'amo, amare, amavi, amatum.',
-    answer : 'amore',
-    choices : [
-      {
-        text : '좋아하다'
-        ,id : 'amore'
-      },{
-        text : '충고하다'
-        ,id : 'debeo'
-      },{
-        text : '칭찬하다'
-        ,id : 'laudo'
-      }
-    ]
-  };
+  $scope.$on('$viewContentLoaded', function() {
+    //call it here
+    nextProblem();
+  });
 
   //정답확인.
   $scope.choose = function(data){
     console.log(data);
-    var correct = $scope.question.answer == data;
+    var correct = $scope.question.answer.titleWord == data;
     console.log(correct);
 
-    //다음문제를불러온다.
-
     //점수처리는어떻게하나?
+    //정답/오답/패스/ 정보를 서버에 넘기고.
+    nextProblem();
   }
+
+  //다음문제를불러온다.
+  function nextProblem(){
+
+    //아이디와... 설정들을가져간다.
+    //TODO 임시데이터.
+    $http.get('http://192.168.0.5:8080/next').success( function(response) {
+      $scope.question = response;
+    });
+
+  }
+
 }]);

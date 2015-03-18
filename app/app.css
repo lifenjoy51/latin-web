@@ -61,12 +61,18 @@
   margin:auto;
 }
 
-.word-question{
+div.word-question{
   background-color : #CCDDFF;
   margin : 2vh 0;
   height: 30vh;
   line-height : 30vh;
-  padding : 1vh 5vw;
+  padding : 2vh 5vw;
+}
+
+.word-question p{
+  line-height : 10px;
+  margin : 2vh 0;
+
 }
 
 .word-choices{

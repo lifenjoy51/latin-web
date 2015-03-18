@@ -16,12 +16,15 @@
     </div>
   </div>
   <div class="word-question">
-    <p>{{question.content}}</p>
+    <p>{{question.answer.titleWord}}</p>
+    <p ng-show="question.answer.presentInfinitive != null">{{question.answer.presentInfinitive}}</p>
+    <p ng-show="question.answer.perfectActive != null">{{question.answer.perfectActive}}</p>
+    <p ng-show="question.answer.supine != null">{{question.answer.supine}}</p>
   </div>
   <div class="word-choices">
     <ul>
       <li ng-repeat="choice in question.choices" >
-        <p ng-click="choose(choice.id)">{{choice.text}}</p>
+        <p ng-click="choose(choice.titleWord)">{{choice.korean}}</p>
       </li>
     </ul>
   </div>
