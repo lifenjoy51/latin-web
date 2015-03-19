@@ -16,8 +16,8 @@ angular.module('latinApp.word', [
   localStorageServiceProvider.setPrefix('latinApp');
 }])
 
-.controller('wordCtrl', ['$scope', 'localStorageService', '$http',
-function($scope, localStorageService, $http) {
+.controller('wordCtrl', ['$scope', 'localStorageService', '$http', '$location',
+function($scope, localStorageService, $http, $location) {
 
   //문제와 정답이 함께 들어가 있다.
   //문제는 질문과 보기, 답으로 이루어져 있다.
@@ -28,9 +28,12 @@ function($scope, localStorageService, $http) {
 
   //정답확인.
   $scope.choose = function(data){
-    console.log(data);
+    //console.log(data);
     var correct = $scope.question.answer.titleWord == data;
-    console.log(correct);
+    //console.log(correct);
+    if(!correct){
+        alert('Erratum!!');
+    }
 
     //점수처리는어떻게하나?
     //정답/오답/패스/ 정보를 서버에 넘기고.
@@ -42,7 +45,7 @@ function($scope, localStorageService, $http) {
 
     //아이디와... 설정들을가져간다.
     //TODO 임시데이터.
-    $http.get('http://192.168.0.5:8080/next').success( function(response) {
+    $http.get('http://'+$location.host()+':8080/next').success( function(response) {
       $scope.question = response;
     });
 

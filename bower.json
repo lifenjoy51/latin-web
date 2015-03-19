@@ -5,6 +5,7 @@
   "homepage": "https://github.com/angular/angular-seed",
   "license": "MIT",
   "private": true,
+  "directory": "app/bower_components/",
   "dependencies": {
     "angular": "1.2.x",
     "angular-route": "1.2.x",
