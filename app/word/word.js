@@ -32,7 +32,7 @@ function($scope, localStorageService, $http, $location) {
     var correct = $scope.question.answer.titleWord == data;
     //console.log(correct);
     if(!correct){
-        alert('Erratum!! '+ $scope.question.answer.korean +' '+ $scope.question.answer.english);
+        alert('Erratum!! \n'+ $scope.question.answer.korean +' '+ $scope.question.answer.english);
     }
 
     //점수처리는어떻게하나?

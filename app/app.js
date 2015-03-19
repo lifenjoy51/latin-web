@@ -22,7 +22,9 @@ function($scope, localStorageService, $location) {
   var userId = localStorageService.get('userId');
   console.log(userId);
   if(userId == null){
-    userId = prompt('Salve! 이름을 입력하세요.');
+    //userId = prompt('Salve! 이름을 입력하세요.');
+    userId = 'test';
+	
     localStorageService.set('userId', userId);
   }
   $scope.userId = userId;
