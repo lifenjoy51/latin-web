@@ -26,8 +26,7 @@ function($scope, localStorageService, $http, $location, $route) {
   //문제는 질문과 보기, 답으로 이루어져 있다.
   $scope.$on('$viewContentLoaded', function() {
     //call it here
-    var registered = localStorageService.get('registered');
-    if((registered)){
+    if((userId)){
       nextProblem('');
     }else{
       $location.path('/');

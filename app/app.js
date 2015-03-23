@@ -16,31 +16,42 @@ function($routeProvider, localStorageServiceProvider) {
   .setPrefix('latinApp');
 }])
 
-.controller('mainCtrl', ['$scope', 'localStorageService','$location', '$http',
-function($scope, localStorageService, $location, $http) {
+.controller('mainCtrl', ['$scope', 'localStorageService','$location', '$http', '$window',
+function($scope, localStorageService, $location, $http, $window) {
   //test!!
   //localStorageService.set('userId', null);
   //localStorageService.set('registered', null);
 
   //registration.
   var userId = localStorageService.get('userId');
-  var registered = localStorageService.get('registered');
 
-  console.log(userId);
-  if(!(registered)){
-    userId = prompt('Salve! 이름을 입력하세요.');
-    localStorageService.set('userId', userId);
+
+
+  //registration.
+  $scope.regist = function(){
+    userId = prompt('Salve! 아이디(이름)을 입력하세요.');
+    //사용자가 취소하면?
+    if (!userId) {
+      userId = prompt('아이디(이름)을 입력해주세요ᅟㅜㅜ');
+    }
 
     //$http.get('http://'+$location.host()+':8080/register',
     $http.get('http://106.186.121.86:8080/register',
-    {params:{
-      'userId' : userId
-    }})
+      {params:{
+        'userId' : userId
+      }}
+    )
     .success( function(response) {
-      localStorageService.set('registered', true);
+      localStorageService.set('userId', userId);
       console.log('success');
-      $location.path('/word');
+      console.log($location);
+      $window.location.reload();
     });
+  };
+
+  console.log(userId);
+  if(!userId){
+    $scope.regist();
   }else{
     console.log('else');
     $location.path('/word');
