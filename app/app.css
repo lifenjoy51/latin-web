@@ -94,7 +94,6 @@ div.word-question{
   list-style-type: none;
   background-color : #CCCCAA;
   margin : 2vh 0;
-  padding : 2vh 2vw;
 }
 
 .word-choices li:active{
@@ -103,5 +102,5 @@ div.word-question{
 }
 
 .word-choices li p{
-  margin:0;
+  padding:2vh 2vw;
 }
