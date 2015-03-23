@@ -10,7 +10,7 @@ angular.module('latinApp', [
 ])
 .config(['$routeProvider','localStorageServiceProvider',
 function($routeProvider, localStorageServiceProvider) {
-  $routeProvider.otherwise({redirectTo: '/word'});
+  //$routeProvider.otherwise({redirectTo: '/word'});
 
   localStorageServiceProvider
   .setPrefix('latinApp');
@@ -18,27 +18,36 @@ function($routeProvider, localStorageServiceProvider) {
 
 .controller('mainCtrl', ['$scope', 'localStorageService','$location', '$http',
 function($scope, localStorageService, $location, $http) {
+  //test!!
+  //localStorageService.set('userId', null);
+  //localStorageService.set('registered', null);
+
   //registration.
   var userId = localStorageService.get('userId');
-  console.log(userId);
-  if(userId != null){
-    userId = prompt('Salve! 이름을 입력하세요.');
-    //userId = 'test';
+  var registered = localStorageService.get('registered');
 
+  console.log(userId);
+  if(!(registered)){
+    userId = prompt('Salve! 이름을 입력하세요.');
     localStorageService.set('userId', userId);
+
+    //$http.get('http://'+$location.host()+':8080/register',
+    $http.get('http://106.186.121.86:8080/register',
+    {params:{
+      'userId' : userId
+    }})
+    .success( function(response) {
+      localStorageService.set('registered', true);
+      console.log('success');
+      $location.path('/word');
+    });
+  }else{
+    console.log('else');
+    $location.path('/word');
   }
+
   $scope.userId = userId;
   //TODO regist to server.
-  $http.get('http://106.186.121.86:8080/');
-
-
-  //$http.get('http://'+$location.host()+':8080/register',
-  $http.get('http://106.186.121.86:8080/register',
-  {params:{
-    'userId' : userId
-  }})
-  .success( function(response) {
-  });
 
   //select unit.
   //TODO server sync.

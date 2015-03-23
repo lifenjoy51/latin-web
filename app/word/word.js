@@ -16,8 +16,8 @@ angular.module('latinApp.word', [
   localStorageServiceProvider.setPrefix('latinApp');
 }])
 
-.controller('wordCtrl', ['$scope', 'localStorageService', '$http', '$location',
-function($scope, localStorageService, $http, $location) {
+.controller('wordCtrl', ['$scope', 'localStorageService', '$http', '$location', '$route',
+function($scope, localStorageService, $http, $location, $route) {
 
   //저장된 유저아이디.
   var userId = localStorageService.get('userId');
@@ -26,7 +26,12 @@ function($scope, localStorageService, $http, $location) {
   //문제는 질문과 보기, 답으로 이루어져 있다.
   $scope.$on('$viewContentLoaded', function() {
     //call it here
-    nextProblem('');
+    var registered = localStorageService.get('registered');
+    if((registered)){
+      nextProblem('');
+    }else{
+      $location.path('/');
+    }
   });
 
   //정답확인.
