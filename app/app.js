@@ -18,14 +18,9 @@ function($routeProvider, localStorageServiceProvider) {
 
 .controller('mainCtrl', ['$scope', 'localStorageService','$location', '$http', '$window',
 function($scope, localStorageService, $location, $http, $window) {
-  //test!!
-  //localStorageService.set('userId', null);
-  //localStorageService.set('registered', null);
 
   //registration.
   var userId = localStorageService.get('userId');
-
-
 
   //registration.
   $scope.regist = function(){
@@ -33,6 +28,9 @@ function($scope, localStorageService, $location, $http, $window) {
     //사용자가 취소하면?
     if (!userId) {
       userId = prompt('아이디(이름)을 입력해주세요ᅟㅜㅜ');
+      if (!userId) {
+        userId = Math.floor(Date.now() / 1000);
+      }
     }
 
     //$http.get('http://'+$location.host()+':8080/register',

@@ -25,7 +25,8 @@ function($scope, localStorageService, $http, $location, $route) {
   //문제와 정답이 함께 들어가 있다.
   //문제는 질문과 보기, 답으로 이루어져 있다.
   $scope.$on('$viewContentLoaded', function() {
-    //call it here
+    //등록상태를 확인한 후 등록인 경우에만 문제 보여주기.
+    //아니면 메인에서 등록로직 시작.
     if((userId)){
       nextProblem('');
     }else{
@@ -62,7 +63,12 @@ function($scope, localStorageService, $http, $location, $route) {
     }})
     .success( function(response) {
       $scope.question = response;
-    });
+    })
+    .error(function(data, status, headers, config) {
+      //에러나면 강제로 재등록.
+      localStorageService.set('userId', null);
+      $location.path('/');
+    });;
 
   }
 
