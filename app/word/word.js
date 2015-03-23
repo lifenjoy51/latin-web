@@ -49,8 +49,8 @@ function($scope, localStorageService, $http, $location) {
     var score = correctness ? '1' : '-1';
     //아이디와... 설정들을가져간다.
     //TODO 임시데이터.
-    $http.get('http://'+$location.host()+':8080/next',
-    //$http.get('http://192.168.0.5:8080/next',
+    //$http.get('http://'+$location.host()+':8080/next',
+    $http.get('http://106.186.121.86:8080/next',
     {params:{
       'userId' : userId,
       'titleWord' : titleWord,

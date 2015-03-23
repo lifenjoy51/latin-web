@@ -30,8 +30,8 @@ function($scope, localStorageService, $location, $http) {
   $scope.userId = userId;
   //TODO regist to server.
 
-  $http.get('http://'+$location.host()+':8080/register',
-    //$http.get('http://192.168.0.5:8080/next',
+  //$http.get('http://'+$location.host()+':8080/register',
+  $http.get('http://106.186.121.86:8080/register',
   {params:{
     'userId' : userId
   }})

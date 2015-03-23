@@ -1,5 +1,6 @@
-.table{
+.table-div{
   display:table;
+  margin-bottom: 0;
 }
 
 .tr{
@@ -35,11 +36,10 @@
 }
 
 .word-top{
-
 }
 
-.countdown{
-  background-color : #112233;
+.level{
+  background-color : #CC0000;
   color : white;
   width:5vh;
   height:5vh;
@@ -47,14 +47,14 @@
   text-align:center;
 }
 
-.countdown p{
+.level p{
   margin:auto;
 }
 
 .score{
-  background-color : #4488ee;
+  background-color : #0066CC;
   color : white;
-  width:5vh;
+  width:15vh;
   height:5vh;
   line-height:5vh;
   text-align:center;
@@ -70,7 +70,7 @@ div.word-question{
   margin : 2vh 0;
   height: 30vh;
   line-height : 30vh;
-  padding : 2vh 5vw;
+  padding : 3vh 5vw;
 }
 
 .word-question p{
