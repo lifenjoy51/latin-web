@@ -21,14 +21,16 @@ function($scope, localStorageService, $location, $http) {
   //registration.
   var userId = localStorageService.get('userId');
   console.log(userId);
-  if(userId == null){
-    //userId = prompt('Salve! 이름을 입력하세요.');
-    userId = 'test';
+  if(userId != null){
+    userId = prompt('Salve! 이름을 입력하세요.');
+    //userId = 'test';
 
     localStorageService.set('userId', userId);
   }
   $scope.userId = userId;
   //TODO regist to server.
+  $http.get('http://106.186.121.86:8080/');
+
 
   //$http.get('http://'+$location.host()+':8080/register',
   $http.get('http://106.186.121.86:8080/register',
