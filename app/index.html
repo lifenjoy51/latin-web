@@ -29,12 +29,17 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="#">{{userId}} - {{selectedUnit.label}}</a>
+        <a class="navbar-brand" href="#">{{userId}}</a>
       </div>
       <div id="navbar" class="navbar-collapse collapse">
         <ul class="nav navbar-nav">
           <li ng-class="getClass('/word')"><a href="#/word">Word</a></li>
-          <li ng-class="getClass('/sentence')"><a href="#/sentence">Sentence</a></li>
+
+          <li ng-class="getClass('/sentence')"><a href="http://54.92.94.180/">Sentence</a></li>
+
+          <li ng-class="getClass('/form')"><a href="http://forum.tarpan.us">Forum</a></li>
+
+          <!--
           <li class="dropdown">
             <a>
               <select ng-model="selectedUnit"
@@ -43,6 +48,8 @@
               </select>
             </a>
           </li>
+        -->
+
 	  <li><a href="https://docs.google.com/spreadsheets/d/11112k2YoMzePZcbvZTSnFU8YDgKqSgBbgCjwWXeFhDA/edit?usp=sharing">Source</a></li>
         </ul>
 

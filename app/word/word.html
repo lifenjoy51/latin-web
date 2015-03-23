@@ -1,5 +1,5 @@
 <div class="body">
-  <div class="word-top table">
+  <div class="word-top table hide">
     <div class="tr">
       <div class="td">
         <div class="countdown">
@@ -17,9 +17,7 @@
   </div>
   <div class="word-question">
     <p>{{question.answer.titleWord}}</p>
-    <p ng-show="question.answer.presentInfinitive != null">{{question.answer.presentInfinitive}}</p>
-    <p ng-show="question.answer.perfectActive != null">{{question.answer.perfectActive}}</p>
-    <p ng-show="question.answer.supine != null">{{question.answer.supine}}</p>
+    <p ng-show="question.answer.desc != null">{{question.answer.desc}}</p>
   </div>
   <div class="word-choices">
     <ul>

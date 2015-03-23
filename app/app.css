@@ -22,6 +22,9 @@
   width:100%;
 }
 
+.hide{
+  display:none;
+}
 
 /********/
 /* word */
@@ -62,7 +65,8 @@
 }
 
 div.word-question{
-  background-color : #CCDDFF;
+  background-color : #006600;
+  color: #EEEEEE;
   margin : 2vh 0;
   height: 30vh;
   line-height : 30vh;
@@ -70,9 +74,8 @@ div.word-question{
 }
 
 .word-question p{
-  line-height : 10px;
-  margin : 2vh 0;
-
+  font-size :5vh;
+  line-height : 5vh;
 }
 
 .word-choices{
@@ -85,7 +88,7 @@ div.word-question{
 
 .word-choices li{
   list-style-type: none;
-  background-color : #6699CC;
+  background-color : #CCCCAA;
   margin : 2vh 0;
   padding : 2vh 2vw;
 }
