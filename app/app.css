@@ -104,3 +104,17 @@ div.word-question{
 .word-choices li p{
   padding:2vh 2vw;
 }
+
+/*************/
+/* converter */
+/*************/
+.convert textarea{
+  width:100%;
+  height:70vh;
+  padding: 1vh 2vw;
+}
+
+.convert button{
+  margin:2vh 0;
+  float:right;
+}
