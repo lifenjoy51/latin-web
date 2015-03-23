@@ -79,6 +79,7 @@ div.word-question{
   text-align:center;
   vertical-align: middle;
   display: table-cell;
+  line-height: 1.3;
 }
 
 .word-choices{
