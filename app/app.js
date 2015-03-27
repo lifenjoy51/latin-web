@@ -34,7 +34,7 @@ function($scope, localStorageService, $location, $http, $window) {
     }
 
     //$http.get('http://'+$location.host()+':8080/register',
-    $http.get('http://106.186.121.86:8080/register',
+    $http.get('http://word.tarpan.us/register',
       {params:{
         'userId' : userId
       }}

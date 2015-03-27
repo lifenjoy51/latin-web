@@ -22,7 +22,7 @@ function($scope, localStorageService, $http, $location) {
 
     //점수처리는어떻게하나?
     $http.get(
-      'http://106.186.121.86:8080/convert',
+      'http://word.tarpan.us/convert',
       {params:{
         'content' : $scope.srcText
       }}
