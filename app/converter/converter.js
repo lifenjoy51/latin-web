@@ -21,7 +21,7 @@ function($scope, localStorageService, $http, $location) {
   $scope.convert = function(){
 
     //점수처리는어떻게하나?
-    $http.get(
+    $http.post(
       'http://106.186.121.86:8080/convert',
       {params:{
         'content' : $scope.srcText
