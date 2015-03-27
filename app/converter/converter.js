@@ -22,7 +22,7 @@ function($scope, localStorageService, $http, $location) {
 
     //점수처리는어떻게하나?
     $http.get(
-      'http://word.tarpan.us/convert',
+      'http://word.tarpan.us/latin/convert',
       {params:{
         'content' : $scope.srcText
       }}

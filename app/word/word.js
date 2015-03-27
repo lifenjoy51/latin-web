@@ -55,7 +55,7 @@ function($scope, localStorageService, $http, $location, $route) {
     //아이디와... 설정들을가져간다.
     //TODO 임시데이터.
     //$http.get('http://'+$location.host()+':8080/next',
-    $http.get('http://word.tarpan.us/next',
+    $http.get('http://word.tarpan.us/latin/next',
     {params:{
       'userId' : userId,
       'titleWord' : titleWord,
