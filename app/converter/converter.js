@@ -21,12 +21,14 @@ function($scope, localStorageService, $http, $location) {
   $scope.convert = function(){
 
     //점수처리는어떻게하나?
-    $http.post(
-      'http://106.186.121.86:8080/convert',
-      {params:{
+    $http({
+      headers:{'Content-Type':'application/x-www-form-urlencoded'},
+      url:'http://106.186.121.86:8080/convert',
+      method:'POST',
+      params:{
         'content' : $scope.srcText
-      }}
-    )
+      }
+    })
     .success( function(response) {
       $scope.srcText = response;
     });
