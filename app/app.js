@@ -29,12 +29,12 @@ function($scope, localStorageService, $location, $http, $window) {
     if (!userId) {
       userId = prompt('아이디(이름)을 입력해주세요ᅟㅜㅜ');
       if (!userId) {
-        userId = Math.floor(Date.now() / 1000);
+        userId = Math.floor(Date.now() / 1000)
       }
     }
 
     //$http.get('http://'+$location.host()+':8080/register',
-    $http.get('http://word.tarpan.us/latin/register',
+    $http.get('http://106.186.121.86:8080/register',
       {params:{
         'userId' : userId
       }}
