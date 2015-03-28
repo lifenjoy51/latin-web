@@ -26,7 +26,7 @@
     <p ng-show="toggleRelationWord && question.answer.more != null">연관어 : {{question.answer.more}}</p>
     <p ng-show="toggleAnswer">정답 : {{question.answer.korean}} {{question.answer.english}}</p>
     <!--sound-->
-    <audio controls preload="none" ng-show="question.answer.audio != null"
+    <audio controls preload="none" 
     ng-src="{{getAudioUrl()}}">
     </audo>
   </div>

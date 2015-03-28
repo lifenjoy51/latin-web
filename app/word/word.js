@@ -54,6 +54,9 @@ function($scope, localStorageService, $http, $location, $route, $sce) {
   //audio
   $scope.getAudioUrl = function(){
     var url = 'http://word.tarpan.us/files/audio/' + $scope.question.answer.audio;
+    if(!$scope.question.answer.audio){
+      url = 'http://54.92.94.180/api/tts?q='+$scope.question.answer.titleWord;
+    }
     //console.log(url);
     return $sce.trustAsResourceUrl(url);
   }
