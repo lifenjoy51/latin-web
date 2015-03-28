@@ -7,10 +7,19 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-filerev');
+  grunt.loadNpmTasks('grunt-contrib-copy');
 
   // Project configuration.
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
+    copy: {
+      html: {
+        expand: true,
+        cwd: 'app/',
+        src: '**/*.html',
+        dest: 'dist/',
+      }
+    },
     useminPrepare: {
       html: 'app/index.html',
       options: {
@@ -19,21 +28,13 @@ module.exports = function(grunt) {
       }
     },
     usemin: {
-      html: 'app/index.html',
-      options: {
-        root: 'app',
-        dest: 'dist'
-      }
+      html: 'dist/index.html'
     }
   });
 
   // Default task.
   //grunt.registerTask('default', ['connect', 'watch']);
   grunt.registerTask('build', [
-    'useminPrepare', 'concat:generated', 'cssmin:generated', 'uglify:generated', 'usemin'
-  ]);
-
-  grunt.registerTask('up', [
-  'useminPrepare', 'concat:generated', 'cssmin:generated', 'uglify:generated', 'usemin'
+    'copy:html','useminPrepare', 'concat:generated', 'cssmin:generated', 'uglify:generated', 'usemin'
   ]);
 };
