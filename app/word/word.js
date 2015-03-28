@@ -16,8 +16,8 @@ angular.module('latinApp.word', [
   localStorageServiceProvider.setPrefix('latinApp');
 }])
 
-.controller('wordCtrl', ['$scope', 'localStorageService', '$http', '$location', '$route',
-function($scope, localStorageService, $http, $location, $route) {
+.controller('wordCtrl', ['$scope', 'localStorageService', '$http', '$location', '$route', '$sce',
+function($scope, localStorageService, $http, $location, $route, $sce) {
 
   //저장된 유저아이디.
   var userId = localStorageService.get('userId');
@@ -34,6 +34,8 @@ function($scope, localStorageService, $http, $location, $route) {
     }
   });
 
+  $scope.question = {answer:''};
+
   //정답확인.
   $scope.choose = function(data){
     //console.log(data);
@@ -49,9 +51,17 @@ function($scope, localStorageService, $http, $location, $route) {
     nextProblem(answer, correct);
   }
 
+  //audio
+  $scope.getAudioUrl = function(){
+    var url = 'http://word.tarpan.us/files/audio/' + $scope.question.answer.audio;
+    console.log(url);
+    return $sce.trustAsResourceUrl(url);
+  }
+
   //다음문제를불러온다.
   function nextProblem(titleWord, correctness){
     var score = correctness ? '1' : '-1';
+    if($scope.toggleAnswer) score=0;
     //아이디와... 설정들을가져간다.
     //TODO 임시데이터.
     //$http.get('http://'+$location.host()+':8080/next',

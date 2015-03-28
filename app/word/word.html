@@ -7,6 +7,8 @@
         </div>
       </div>
       <div class="td middle">
+        <input ng-model="toggleRelationWord" type="checkbox"><span>연관어보기</span></input>
+        <input ng-model="toggleAnswer" type="checkbox"><span>정답보기</span></input>
       </div>
       <div class="td">
         <div class="score">
@@ -18,6 +20,15 @@
   <div class="word-question">
     <p>{{question.answer.titleWord}}<br/>{{question.answer.meaning}}</p>
     <!--<p ng-show="question.answer.meaning != null">{{question.answer.meaning}}</p>-->
+  </div>
+  <div class="word-info">
+    <!--relation word-->
+    <p ng-show="toggleRelationWord && question.answer.more != null">연관어 : {{question.answer.more}}</p>
+    <p ng-show="toggleAnswer">정답 : {{question.answer.korean}} {{question.answer.english}}</p>
+    <!--sound-->
+    <audio controls preload="none" ng-show="question.answer.audio != null"
+    ng-src="{{getAudioUrl()}}">
+    </audo>
   </div>
   <div class="word-choices">
     <ul>
