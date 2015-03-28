@@ -54,7 +54,7 @@ function($scope, localStorageService, $http, $location, $route, $sce) {
   //audio
   $scope.getAudioUrl = function(){
     var url = 'http://word.tarpan.us/files/audio/' + $scope.question.answer.audio;
-    console.log(url);
+    //console.log(url);
     return $sce.trustAsResourceUrl(url);
   }
 

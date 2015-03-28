@@ -41,8 +41,8 @@ function($scope, localStorageService, $location, $http, $window) {
     )
     .success( function(response) {
       localStorageService.set('userId', userId);
-      console.log('success');
-      console.log($location);
+      //console.log('success');
+      //console.log($location);
       $window.location.reload();
     });
   };
@@ -51,7 +51,7 @@ function($scope, localStorageService, $location, $http, $window) {
   if(!userId){
     $scope.regist();
   }else{
-    console.log('else');
+    //console.log('else');
     $location.path('/word');
   }
 
