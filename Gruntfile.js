@@ -19,6 +19,12 @@ module.exports = function(grunt) {
         src: '**/*.html',
         dest: 'dist/',
       }
+      ,css : {
+        expand:true,
+        cwd:'.tmp/concat/',
+        src:'css/app.css',
+        dest:'dist/'
+      }
     },
     useminPrepare: {
       html: 'app/index.html',
@@ -50,6 +56,6 @@ module.exports = function(grunt) {
   // Default task.
   //grunt.registerTask('default', ['connect', 'watch']);
   grunt.registerTask('build', [
-    'copy:html','useminPrepare', 'concat:generated', 'cssmin:generated', 'uglify:generated', 'filerev', 'usemin'
+    'copy:html','useminPrepare', 'concat:generated','copy:css', 'uglify:generated', 'filerev', 'usemin'
   ]);
 };
