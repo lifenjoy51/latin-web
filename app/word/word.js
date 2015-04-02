@@ -108,10 +108,13 @@ function($scope, localStorageService, $http, $location, $route, $sce) {
   }
 
   //set audio autoplay
-  $scope.$watch('toggleAutoplay', function() {
-    console.log('play');
+  $scope.$watch('toggleAutoplay', function(newvalue) {
+    console.log('autoplay');
     var audio = document.getElementById("audio");
     audio.autoplay=$scope.toggleAutoplay;
+    if(newvalue){
+      alert('음성 재생은 데이터를 많이 사용합니다. 단어 40개에 1MB 정도.');
+    }
   });
 
 }])
