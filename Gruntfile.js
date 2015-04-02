@@ -29,12 +29,27 @@ module.exports = function(grunt) {
     },
     usemin: {
       html: 'dist/index.html'
+    },
+    filerev: {
+        options: {
+            encoding: 'utf8',
+            algorithm: 'md5',
+            length: 8
+        },
+        source: {
+            files: [{
+                src: [
+                    'dist/js/*.js',
+                    'dist/css/*.css'
+                ]
+            }]
+        }
     }
   });
 
   // Default task.
   //grunt.registerTask('default', ['connect', 'watch']);
   grunt.registerTask('build', [
-    'copy:html','useminPrepare', 'concat:generated', 'cssmin:generated', 'uglify:generated', 'usemin'
+    'copy:html','useminPrepare', 'concat:generated', 'cssmin:generated', 'uglify:generated', 'filerev', 'usemin'
   ]);
 };
