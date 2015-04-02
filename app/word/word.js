@@ -27,6 +27,7 @@ function($scope, localStorageService, $http, $location, $route, $sce) {
   $scope.units.push({'name':'All', 'value':0});
   $scope.unit = $scope.units[0];
   $scope.audioUrl = '';
+  $scope.played=false;
 
   //문제와 정답이 함께 들어가 있다.
   //문제는 질문과 보기, 답으로 이루어져 있다.
@@ -36,6 +37,7 @@ function($scope, localStorageService, $http, $location, $route, $sce) {
     if((userId)){
       initUnit();
       nextProblem('');
+      initAudioEvent();
     }else{
       $location.path('/');
     }
@@ -104,7 +106,17 @@ function($scope, localStorageService, $http, $location, $route, $sce) {
         $scope.units.push(unit);
       }
     });
+  };
 
+  function initAudioEvent(){
+    var vid = document.getElementById("audio");
+    vid.onplay = function() {
+      console.log('init');
+      if(!$scope.played){
+        alert('음성 재생은 데이터를 많이 사용합니다. 단어 30개에 1MB 정도.');
+        $scope.played = true;
+      }
+    };
   }
 
   //set audio autoplay
@@ -113,7 +125,7 @@ function($scope, localStorageService, $http, $location, $route, $sce) {
     var audio = document.getElementById("audio");
     audio.autoplay=$scope.toggleAutoplay;
     if(newvalue){
-      alert('음성 재생은 데이터를 많이 사용합니다. 단어 40개에 1MB 정도.');
+      alert('음성 재생은 데이터를 많이 사용합니다. 단어 30개에 1MB 정도.');
     }
   });
 
