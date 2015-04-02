@@ -110,6 +110,11 @@ div.word-info{
   margin:1vh 0;
 }
 
+.word-info>.answer{
+  font-size : 12pt;
+  font-size :3vh;
+}
+
 .word-info audio{
   width:100%;
   margin: 0 0;
