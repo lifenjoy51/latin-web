@@ -83,13 +83,6 @@ function($scope, localStorageService, $http, $location, $route, $sce) {
     }})
     .success( function(response) {
       $scope.question = response;
-      $scope.$watch('audioUrl', function() {
-        if($scope.toggleAutoplay){
-          var audio = document.getElementById("audio");
-          audio.load();
-          audio.play();
-        }
-      });
     })
     .error(function(data, status, headers, config) {
       //에러나면 강제로 재등록.
@@ -113,6 +106,13 @@ function($scope, localStorageService, $http, $location, $route, $sce) {
     });
 
   }
+
+  //set audio autoplay
+  $scope.$watch('toggleAutoplay', function() {
+    console.log('play');
+    var audio = document.getElementById("audio");
+    audio.autoplay=$scope.toggleAutoplay;
+  });
 
 }])
 .run(['$rootScope','$templateCache',function($rootScope, $templateCache) {
