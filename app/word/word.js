@@ -92,7 +92,7 @@ function($scope, localStorageService, $http, $location, $route, $sce) {
 
   function initUnit(){
     //$http.get('http://'+$location.host()+':8080/next',
-    $http.get('http://192.168.0.5:8080/units')
+    $http.get('http://106.186.121.86:8080/units')
     .success( function(response) {
       for(var i=1; i<=response; i++){
         var unit = {
