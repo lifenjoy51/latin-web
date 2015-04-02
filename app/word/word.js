@@ -26,6 +26,7 @@ function($scope, localStorageService, $http, $location, $route, $sce) {
   $scope.units = new Array();
   $scope.units.push({'name':'All', 'value':0});
   $scope.unit = $scope.units[0];
+  $scope.audioUrl = '';
 
   //문제와 정답이 함께 들어가 있다.
   //문제는 질문과 보기, 답으로 이루어져 있다.
@@ -61,6 +62,7 @@ function($scope, localStorageService, $http, $location, $route, $sce) {
     if(!$scope.question.answer.audio){
       url = 'http://api.tarpan.us/tts?q='+$scope.question.answer.titleWord;
     }
+    $scope.audioUrl = url;
     //console.log(url);
     return $sce.trustAsResourceUrl(url);
   }
@@ -81,6 +83,13 @@ function($scope, localStorageService, $http, $location, $route, $sce) {
     }})
     .success( function(response) {
       $scope.question = response;
+      $scope.$watch('audioUrl', function() {
+        if($scope.toggleAutoplay){
+          var audio = document.getElementById("audio");
+          audio.load();
+          audio.play();
+        }
+      });
     })
     .error(function(data, status, headers, config) {
       //에러나면 강제로 재등록.
