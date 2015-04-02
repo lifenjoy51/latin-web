@@ -75,4 +75,9 @@ function($scope, localStorageService, $location, $http, $window) {
       return ""
     }
   }
+}])
+.run(['$rootScope','$templateCache',function($rootScope, $templateCache) {
+   $rootScope.$on('$viewContentLoaded', function() {
+      $templateCache.removeAll();
+   });
 }]);

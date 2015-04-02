@@ -105,4 +105,10 @@ function($scope, localStorageService, $http, $location, $route, $sce) {
 
   }
 
+}])
+.run(['$rootScope','$templateCache',function($rootScope, $templateCache) {
+   $rootScope.$on('$viewContentLoaded', function() {
+      $templateCache.removeAll();
+   });
 }]);
+;
