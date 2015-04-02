@@ -25,7 +25,6 @@
   <div class="word-info">
     <!--relation word-->
     <p ng-show="toggleRelationWord && question.answer.more != null">[{{question.answer.more}}]</p>
-    <p ng-show="toggleAnswer" class="answer"><b>{{question.answer.korean}} {{question.answer.english}}</b></p>
     <!--sound-->
     <audio controls preload="none"
     ng-src="{{getAudioUrl()}}">
@@ -37,7 +36,7 @@
         <p ng-click="choose(choice.titleWord)">{{choice.korean}} {{choice.english}}</p>
       </li>
       <li ng-show="toggleAnswer">
-        <p ng-click="choose(question.answer.titleWord)">{{question.answer.korean}} {{question.answer.english}}</p>
+        <p ng-click="choose(question.answer.titleWord)"  class="answer">{{question.answer.korean}} {{question.answer.english}}</p>
       </li>
     </ul>
   </div>
