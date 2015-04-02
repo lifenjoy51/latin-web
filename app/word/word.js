@@ -22,19 +22,23 @@ function($scope, localStorageService, $http, $location, $route, $sce) {
   //저장된 유저아이디.
   var userId = localStorageService.get('userId');
 
+  $scope.question = {answer:''};
+  $scope.units = new Array();
+  $scope.units.push({'name':'All', 'value':0});
+  $scope.unit = $scope.units[0];
+
   //문제와 정답이 함께 들어가 있다.
   //문제는 질문과 보기, 답으로 이루어져 있다.
   $scope.$on('$viewContentLoaded', function() {
     //등록상태를 확인한 후 등록인 경우에만 문제 보여주기.
     //아니면 메인에서 등록로직 시작.
     if((userId)){
+      initUnit();
       nextProblem('');
     }else{
       $location.path('/');
     }
   });
-
-  $scope.question = {answer:''};
 
   //정답확인.
   $scope.choose = function(data){
@@ -72,7 +76,8 @@ function($scope, localStorageService, $http, $location, $route, $sce) {
     {params:{
       'userId' : userId,
       'titleWord' : titleWord,
-      'score' : score
+      'score' : score,
+      'unit' : $scope.unit.value
     }})
     .success( function(response) {
       $scope.question = response;
@@ -82,6 +87,21 @@ function($scope, localStorageService, $http, $location, $route, $sce) {
       localStorageService.set('userId', null);
       $location.path('/');
     });;
+
+  }
+
+  function initUnit(){
+    //$http.get('http://'+$location.host()+':8080/next',
+    $http.get('http://192.168.0.5:8080/units')
+    .success( function(response) {
+      for(var i=1; i<=response; i++){
+        var unit = {
+          'name' : 'Unit '+i
+          ,'value' : i
+        };
+        $scope.units.push(unit);
+      }
+    });
 
   }
 

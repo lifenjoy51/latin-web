@@ -102,6 +102,7 @@ div.word-info{
   width : 100%;
   padding : 4pt 20pt;
   padding : 1vh 5vw;
+  text-align:center;
 }
 
 .word-info p{
