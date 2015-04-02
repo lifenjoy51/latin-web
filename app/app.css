@@ -110,6 +110,7 @@ div.word-info{
 }
 
 .word-info audio{
+  width:100%;
   margin: 0 0;
 }
 
