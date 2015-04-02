@@ -8,10 +8,12 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-filerev');
   grunt.loadNpmTasks('grunt-contrib-copy');
+  grunt.loadNpmTasks('grunt-contrib-clean');
 
   // Project configuration.
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
+    clean : ['dist/'],
     copy: {
       html: {
         expand: true,
@@ -56,6 +58,6 @@ module.exports = function(grunt) {
   // Default task.
   //grunt.registerTask('default', ['connect', 'watch']);
   grunt.registerTask('build', [
-    'copy:html','useminPrepare', 'concat:generated','copy:css', 'uglify:generated', 'filerev', 'usemin'
+    'clean','copy:html','useminPrepare', 'concat:generated','copy:css', 'uglify:generated', 'filerev', 'usemin'
   ]);
 };
