@@ -52,6 +52,7 @@ function($scope, localStorageService, $http, $location, $route, $sce) {
   //문제는 질문과 보기, 답으로 이루어져 있다.
   $scope.$on('$viewContentLoaded', function() {
     init();
+    $scope.toggleEnglish();
   });
 
   //정답확인.
