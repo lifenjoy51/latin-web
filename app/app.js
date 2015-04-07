@@ -5,6 +5,7 @@ angular.module('latinApp', [
   'ngRoute',
   'latinApp.word',
   'latinApp.converter',
+  'latinApp.exercise',
   'latinApp.version',
   'LocalStorageModule'
 ])

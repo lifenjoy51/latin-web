@@ -1,0 +1,48 @@
+<div class="body">
+  <div class="exercise-body">
+
+    <div class="tr">
+      <div class="td">
+      </div>
+      <div class="td">
+        <b>Unit </b>{{unit}}
+      </div>
+      <div class="td">
+        <select ng-model="unit" ng-init="unit=1;">
+          <option>1</option>
+          <option>2</option>
+          <option>3</option>
+          <option>4</option>
+        </select>
+      </div>
+    </div>
+    <div class="tr">
+      <div class="td">
+        <b>seq</b>
+      </div>
+      <div class="td">
+        <b>Latin</b>
+        <button class="btn btn-default" ng-click="toggleLatin();">Toggle all</button>
+      </div>
+      <div class="td">
+        <b>English</b>
+        <button class="btn btn-default" ng-click="toggleEnglish();">Toggle all</button>
+      </div>
+    </div>
+
+    <div class="tr"  ng-repeat="exercise in exercises|filter:{ unit: unit}">
+      <div class="td">
+        {{exercise.seq}}
+      </div>
+      <div class="td"
+      ng-click="exercise.showLatin = exercise.showLatin ? false : true;">
+        <p ng-show="!exercise.showLatin">{{exercise.latin}}</p>
+      </div>
+      <div class="td"
+      ng-click="exercise.showEnglish = exercise.showEnglish ? false : true;">
+        <p ng-show="!exercise.showEnglish">{{exercise.english}}</p>
+      </div>
+    </div>
+
+  </div>
+</div>

@@ -161,3 +161,15 @@ div.word-info{
   margin:2vh 0;
   float:right;
 }
+
+/************/
+/* exercise */
+/************/
+.exercise-body .td{
+  border : solid 1px;
+  padding : 2px 4px;
+}
+
+.exercise-body p{
+  margin : 1em 0;
+}
