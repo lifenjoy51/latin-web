@@ -1,5 +1,5 @@
 <div class="body">
-  <div class="exercise-body">
+  <div class="exercise-body table-div">
 
     <div class="tr">
       <div class="td">
@@ -31,14 +31,14 @@
     </div>
 
     <div class="tr"  ng-repeat="exercise in exercises|filter:{ unit: unit}">
-      <div class="td">
+      <div class="td seq">
         {{exercise.seq}}
       </div>
-      <div class="td"
+      <div class="td latin"
       ng-click="exercise.showLatin = exercise.showLatin ? false : true;">
         <p ng-show="!exercise.showLatin">{{exercise.latin}}</p>
       </div>
-      <div class="td"
+      <div class="td english"
       ng-click="exercise.showEnglish = exercise.showEnglish ? false : true;">
         <p ng-show="!exercise.showEnglish">{{exercise.english}}</p>
       </div>

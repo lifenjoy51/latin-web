@@ -165,6 +165,10 @@ div.word-info{
 /************/
 /* exercise */
 /************/
+.exercise-body{
+  width:100%;
+}
+
 .exercise-body .td{
   border : solid 1px;
   padding : 2px 4px;
@@ -172,4 +176,16 @@ div.word-info{
 
 .exercise-body p{
   margin : 1em 0;
+}
+
+.exercise-body .seq{
+  width:10%;
+}
+
+.exercise-body .latin{
+  width:45%;
+}
+
+.exercise-body .english{
+  width:45%;
 }
