@@ -134,6 +134,40 @@ function($scope, localStorageService, $http, $location, $route, $sce) {
     , { 'unit' : 4 ,'seq' : 24 ,'latin' : 'Virī magnæ cūræ estis.' ,'english' : 'You are men of great care.'}
     , { 'unit' : 4 ,'seq' : 25 ,'latin' : 'Sine morā cūram officiō dare dēbēmus.' ,'english' : 'We ought to give attention to duty without delay.'}
     , { 'unit' : 4 ,'seq' : 26 ,'latin' : 'Sine oculīs vīta est nihil.' ,'english' : 'Life is nothing without eyes.'}
+    , { 'unit' : 5 ,'seq' : 9 ,'latin' : 'Magister noster mē laudat et tē crās laudābit.' ,'english' : 'Our teacher praises me and he will praise you tomorrow.'}
+    , { 'unit' : 5 ,'seq' : 10 ,'latin' : 'Līberī virī perīcula nostra superābant.' ,'english' : 'Free men were overcoming our dangers.'}
+    , { 'unit' : 5 ,'seq' : 11 ,'latin' : 'Fīliī nostrī puellās pulchrās amant.' ,'english' : 'Our sons love pretty girls.'}
+    , { 'unit' : 5 ,'seq' : 12 ,'latin' : 'Amīcus noster in numerō stultōrum nōn remanēbit.' ,'english' : 'Our friend will not stay in the company of fools.'}
+    , { 'unit' : 5 ,'seq' : 13 ,'latin' : 'Culpās multās habēbāmus et semper habēbimus.' ,'english' : 'We used to have many faults and always shall have.'}
+    , { 'unit' : 5 ,'seq' : 14 ,'latin' : 'Perīcula magna animōs nostrōs nōn superant.' ,'english' : 'Great dangers do not overcome our courage.'}
+    , { 'unit' : 5 ,'seq' : 15 ,'latin' : 'Pulchra patria nostra est lībera.' ,'english' : 'Our beautiful country is free.'}
+    , { 'unit' : 5 ,'seq' : 16 ,'latin' : 'Līberī virī estis; patriam pulchram habēbitis.' ,'english' : 'You are free men; you will have a beautiful country.'}
+    , { 'unit' : 5 ,'seq' : 17 ,'latin' : 'Magistrī līberī officiō cūram dabant.' ,'english' : 'Free teachers were giving attention to duty.'}
+    , { 'unit' : 5 ,'seq' : 18 ,'latin' : 'Malōs igitur in patriā nostrā superābimus.' ,'english' : 'Therefore, we shall overcome evil men in our country.'}
+    , { 'unit' : 5 ,'seq' : 19 ,'latin' : 'Sī īram tuam superābis, tē superābis.' ,'english' : 'If you overcome your anger, you will overcome your self.'}
+    , { 'unit' : 5 ,'seq' : 20 ,'latin' : 'Propter nostrōs animōs multī sunt līberī.' ,'english' : 'Because of our courage many men are free.'}
+    , { 'unit' : 5 ,'seq' : 21 ,'latin' : 'Tē, Ō patria lībera, semper amābāmus et semper amābimus.' ,'english' : 'Free fatherland, we always used to love you and we always shall love.'}
+    , { 'unit' : 5 ,'seq' : 22 ,'latin' : 'Sapientiam pecūniā nōn cōnservābitis.' ,'english' : 'You will not preserve wisdom by means of money.'}
+    , { 'unit' : 5 ,'seq' : 23 ,'latin' : 'Habetne animus tuus satis sapientiæ?' ,'english' : 'Dœs your soul possess enough wisdom?'}
+    , { 'unit' : 6 ,'seq' : 6 ,'latin' : 'Patria vestra erat lībera.' ,'english' : 'Your country was free.'}
+    , { 'unit' : 6 ,'seq' : 7 ,'latin' : 'Poteram esse tyrannus.' ,'english' : 'I was able to be a tyrant.'}
+    , { 'unit' : 6 ,'seq' : 8 ,'latin' : 'Amīcus vester erit tyrannus.' ,'english' : 'Your friend will be a tyrant.'}
+    , { 'unit' : 6 ,'seq' : 9 ,'latin' : 'Ubi tyrannus est, ibi virī nōn possunt esse līberī.' ,'english' : 'Where is a tyrant, there men cannot be free.'}
+    , { 'unit' : 6 ,'seq' : 10 ,'latin' : 'In patriā nostrā heri nōn poterat remanēre.' ,'english' : 'He could not remain in our country yesterday.'}
+    , { 'unit' : 6 ,'seq' : 11 ,'latin' : 'Tyrannī multa vitia semper habēbunt.' ,'english' : 'Tyrants will always have many faults.'}
+    , { 'unit' : 6 ,'seq' : 12 ,'latin' : 'Tyrannōs superāre nōn poterāmus.' ,'english' : 'We were not able to overcome the tyrants.'}
+    , { 'unit' : 6 ,'seq' : 13 ,'latin' : 'Tyrannum nostrum superāre dēbēmus.' ,'english' : 'We ought to overcome our tyrant.'}
+    , { 'unit' : 6 ,'seq' : 14 ,'latin' : 'Tyrannus bonōs superāre poterat; sed ibi remanēre nōn poterit.' ,'english' : 'The tyrant was able to overcome good men; but he will not be able to remain there.'}
+    , { 'unit' : 6 ,'seq' : 15 ,'latin' : 'Poteritis perīcula tyrannī vidēre.' ,'english' : 'You will be able to see the dangers of a tyrant.'}
+    , { 'unit' : 6 ,'seq' : 16 ,'latin' : 'Vitia tyrannōrum tolerāre nōn possumus.' ,'english' : 'We cannot tolerate the faults of tyrants.'}
+    , { 'unit' : 6 ,'seq' : 17 ,'latin' : 'Īnsidiās tyrannī nōn tolerābās.' ,'english' : 'You were not tolerating the treachery of the tyrant.'}
+    , { 'unit' : 6 ,'seq' : 18 ,'latin' : 'Ōtium in patriā vestrā nōn potest esse perpetuum.' ,'english' : 'The peace in your country cannot be perpetual.'}
+    , { 'unit' : 6 ,'seq' : 19 ,'latin' : 'Dēbēs virōs līberōs dē tyrannīs monēre.' ,'english' : 'You ought to warn free men about tyrants.'}
+    , { 'unit' : 6 ,'seq' : 20 ,'latin' : 'Magister vester librōs pulchrōs semper amābat.' ,'english' : 'Your teacher always used to like fine books.'}
+    , { 'unit' : 6 ,'seq' : 21 ,'latin' : 'Librī bonī vērīque poterant patriam cōnservāre.' ,'english' : 'Good and true books were able to save the country.'}
+    , { 'unit' : 6 ,'seq' : 22 ,'latin' : 'Librīs bonīs patriam vestram cōnservāre poteritis.' ,'english' : 'You will be able to save your country with good books.'}
+    , { 'unit' : 6 ,'seq' : 23 ,'latin' : 'Tyrannī sapientiam bonōrum librōrum superāre nōn poterunt.' ,'english' : 'Tyrants will not be able to overcome the wisdom of good books.'}
+    , { 'unit' : 6 ,'seq' : 24 ,'latin' : 'Malī librōs bonōs nōn possunt tolerāre.' ,'english' : 'Bad men cannot tolerate good books.'}
     ];
   };
 
