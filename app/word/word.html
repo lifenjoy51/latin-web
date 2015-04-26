@@ -11,6 +11,8 @@
         ng-change="initPos(); initWords()"></select>
         <input ng-model="toggleAutoplay" type="checkbox"
                 ng-init="toggleAutoplay=false"><span>자동재생</span></input>
+        <input ng-model="toggleInverse" type="checkbox"
+        ng-init="toggleInverse=false"><span>거꾸로</span></input>
       </div>
       <div class="td">
         <div class="score">
@@ -20,7 +22,8 @@
     </div>
   </div>
   <div class="word-question">
-    <p>{{word.titleWord}}</p>
+    <p ng-show="toggleInverse">{{word.english}}  {{word.korean}}</p>
+    <p ng-show="!toggleInverse">{{word.titleWord}}</p>
     <!--<p ng-show="word.meaning != null">{{word.meaning}}</p>-->
   </div>
   <div class="word-info">
@@ -34,7 +37,8 @@
   <div class="word-choices">
     <ul>
       <li>
-        <p ng-click="next()"  class="answer">{{word.english}} {{word.korean}}</p>
+        <p ng-click="next()"  class="answer" ng-show="toggleInverse">{{word.titleWord}}</p>
+        <p ng-click="next()"  class="answer" ng-show="!toggleInverse">{{word.english}} {{word.korean}}</p>
       </li>
     </ul>
   </div>
