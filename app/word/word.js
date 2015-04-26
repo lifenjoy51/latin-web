@@ -79,7 +79,7 @@ function($scope, localStorageService, $http, $location, $route, $sce) {
     $http.get('http://106.186.121.86:8080/api/v1/words/next',
     {params:{
       'userId' : userId,
-      'titleWord' : latin,
+      'latin' : latin,
       'score' : score,
       'unit' : $scope.unit.value
     }})

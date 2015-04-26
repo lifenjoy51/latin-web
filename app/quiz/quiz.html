@@ -1,21 +1,23 @@
 <div class="body">
   <div class="word-top table-div">
     <div class="tr">
-      <div class="td">
+      <div class="td hide">
         <div class="level">
           <span>{{question.info.level}}</span>
         </div>
       </div>
       <div class="td middle">
-        <select ng-model="unit" ng-options="unit.name for unit in units track by unit.value"></select>
-        <input ng-model="toggleRelationWord" type="checkbox"
-                ng-init="toggleRelationWord=true"><span>연관어</span></input>
-        <input ng-model="toggleAnswer" type="checkbox"
-                ng-init="toggleAnswer=true"><span>학습모드</span></input>
+        <select ng-model="unit" ng-options="unit.name for unit in units track by unit.value"
+        ng-change="nextProblem('')"></select>
+        <select ng-model="div" ng-change="nextProblem('')" ng-init="div='all'">
+          <option value="all">Word/Sentence</option>
+          <option value="word">Word</option>
+          <option value="sentence">Sentence</option>
+        </select>
         <input ng-model="toggleAutoplay" type="checkbox"
                 ng-init="toggleAutoplay=false"><span>자동재생</span></input>
       </div>
-      <div class="td">
+      <div class="td hide">
         <div class="score">
           <span>{{question.info.score}} / {{question.info.totalWordCount}}</span>
         </div>
@@ -28,7 +30,7 @@
   </div>
   <div class="word-info">
     <!--relation word-->
-    <p ng-show="toggleRelationWord && question.answer.etc != null">[{{question.answer.etc}}]</p>
+    <p ng-show="question.answer.etc != null">[{{question.answer.etc}}]</p>
     <!--sound-->
     <audio id="audio" controls preload="none"
     ng-src="{{getAudioUrl()}}">
@@ -36,11 +38,8 @@
   </div>
   <div class="word-choices">
     <ul>
-      <li ng-repeat="choice in question.choices"  ng-show="!toggleAnswer">
+      <li ng-repeat="choice in question.choices">
         <p ng-click="choose(choice.latin)">{{choice.korean}} {{choice.english}}</p>
-      </li>
-      <li ng-show="toggleAnswer">
-        <p ng-click="choose(question.answer.latin)"  class="answer">{{question.answer.korean}} {{question.answer.english}}</p>
       </li>
     </ul>
   </div>

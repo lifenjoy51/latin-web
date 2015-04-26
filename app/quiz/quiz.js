@@ -36,7 +36,7 @@ function($scope, localStorageService, $http, $location, $route, $sce) {
     //아니면 메인에서 등록로직 시작.
     if((userId)){
       initUnit();
-      nextProblem('');
+      $scope.nextProblem('');
       initAudioEvent();
     }else{
       $location.path('/');
@@ -55,7 +55,7 @@ function($scope, localStorageService, $http, $location, $route, $sce) {
 
     //점수처리는어떻게하나?
     //정답/오답/패스/ 정보를 서버에 넘기고.
-    nextProblem(answer, correct);
+    $scope.nextProblem(answer, correct);
   }
 
   //audio
@@ -70,13 +70,23 @@ function($scope, localStorageService, $http, $location, $route, $sce) {
   }
 
   //다음문제를불러온다.
-  function nextProblem(latin, correctness){
+  $scope.nextProblem = function(latin, correctness){
     var score = correctness ? '1' : '-1';
     if($scope.toggleAnswer) score=0;
     //아이디와... 설정들을가져간다.
     //TODO 임시데이터.
     //$http.get('http://'+$location.host()+':8080/next',
-    $http.get('http://106.186.121.86:8080/api/v1/sentences/next',
+    var quizUrl;
+    if($scope.div == 'word'){  //word
+      quizUrl = 'http://106.186.121.86:8080/api/v1/words/next';
+    } else if($scope.div == 'sentence'){ //sentence
+      quizUrl = 'http://106.186.121.86:8080/api/v1/sentences/next';
+    } else{
+      quizUrl = Math.round(Math.random()) == 0
+      ? 'http://106.186.121.86:8080/api/v1/sentences/next'
+      : 'http://106.186.121.86:8080/api/v1/words/next'
+    }
+    $http.get(quizUrl,
     {params:{
       'userId' : userId,
       'latin' : latin,
