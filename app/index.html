@@ -34,15 +34,16 @@
       </div>
       <div id="navbar" class="navbar-collapse collapse">
         <ul class="nav navbar-nav">
+          <li ng-class="getClass('/quiz')"><a href="#/quiz">Quiz</a></li>
+
           <li ng-class="getClass('/word')"><a href="#/word">Word</a></li>
 
           <li ng-class="getClass('/exercise')"><a href="#/exercise">Exercise</a></li>
 
-          <li ng-class="getClass('/sentence')"><a href="http://54.92.94.180/">Sentence</a></li>
-
 	  <!--
           <li ng-class="getClass('/forum')"><a href="http://forum.tarpan.us">Forum</a></li>
 	  -->
+
           <li ng-class="getClass('/converter')"><a href="#/converter">āēīōū Converter</a></li>
 
           <li ng-class="getClass('/id')"><a href="" ng-click="regist()">아이디 변경</a></li>
@@ -60,8 +61,6 @@
 
 	  <li><a href="https://docs.google.com/spreadsheets/d/11112k2YoMzePZcbvZTSnFU8YDgKqSgBbgCjwWXeFhDA/edit?usp=sharing">Source</a></li>
         </ul>
-
-
 
         <ul class="nav navbar-nav navbar-right">
         </ul>
@@ -83,6 +82,7 @@
   <script src="bower_components/angular-local-storage/dist/angular-local-storage.min.js"></script>
 
   <script src="app.js"></script>
+  <script src="quiz/quiz.js"></script>
   <script src="word/word.js"></script>
   <script src="converter/converter.js"></script>
   <script src="exercise/exercise.js"></script>

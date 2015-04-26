@@ -3,6 +3,7 @@
 // Declare app level module which depends on views, and components
 angular.module('latinApp', [
   'ngRoute',
+  'latinApp.quiz',
   'latinApp.word',
   'latinApp.converter',
   'latinApp.exercise',
@@ -28,14 +29,11 @@ function($scope, localStorageService, $location, $http, $window) {
     userId = prompt('Salve! 아이디(이름)을 입력하세요.');
     //사용자가 취소하면?
     if (!userId) {
-      userId = prompt('아이디(이름)을 입력해주세요ᅟㅜㅜ');
-      if (!userId) {
         userId = Math.floor(Date.now() / 1000)
-      }
     }
 
     //$http.get('http://'+$location.host()+':8080/register',
-    $http.get('http://106.186.121.86:8080/register',
+    $http.get('http://106.186.121.86:8080/api/v1/register',
       {params:{
         'userId' : userId
       }}
@@ -53,7 +51,7 @@ function($scope, localStorageService, $location, $http, $window) {
     $scope.regist();
   }else{
     //console.log('else');
-    $location.path('/word');
+    $location.path('/quiz');
   }
 
   $scope.userId = userId;

@@ -1,22 +1,22 @@
 'use strict';
 
-angular.module('latinApp.word', [
+angular.module('latinApp.quiz', [
 'ngRoute',
 'LocalStorageModule'
 ])
 
 .config(['$routeProvider','localStorageServiceProvider',
   function($routeProvider, localStorageServiceProvider) {
-  $routeProvider.when('/word', {
-    templateUrl: 'word/word.html',
-    controller: 'wordCtrl'
+  $routeProvider.when('/quiz', {
+    templateUrl: 'quiz/quiz.html',
+    controller: 'quizCtrl'
   });
 
   //local storage
   localStorageServiceProvider.setPrefix('latinApp');
 }])
 
-.controller('wordCtrl', ['$scope', 'localStorageService', '$http', '$location', '$route', '$sce',
+.controller('quizCtrl', ['$scope', 'localStorageService', '$http', '$location', '$route', '$sce',
 function($scope, localStorageService, $http, $location, $route, $sce) {
 
   //저장된 유저아이디.
@@ -76,10 +76,10 @@ function($scope, localStorageService, $http, $location, $route, $sce) {
     //아이디와... 설정들을가져간다.
     //TODO 임시데이터.
     //$http.get('http://'+$location.host()+':8080/next',
-    $http.get('http://106.186.121.86:8080/api/v1/words/next',
+    $http.get('http://106.186.121.86:8080/api/v1/sentences/next',
     {params:{
       'userId' : userId,
-      'titleWord' : latin,
+      'latin' : latin,
       'score' : score,
       'unit' : $scope.unit.value
     }})
