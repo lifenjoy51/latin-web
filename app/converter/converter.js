@@ -23,7 +23,7 @@ function($scope, localStorageService, $http, $location) {
     //점수처리는어떻게하나?
     $http({
       headers:{'Content-Type':'application/x-www-form-urlencoded'},
-      url:'http://106.186.121.86:8080/convert',
+      url:'http://106.186.121.86:8080/api/v1/convert',
       method:'POST',
       params:{
         'content' : $scope.srcText

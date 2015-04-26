@@ -26,6 +26,8 @@ function($scope, localStorageService, $http, $location, $route, $sce) {
   $scope.showLatin = true;
   $scope.showEnglish = true;
   $scope.units = new Array();
+  $scope.units.push({'name':'-', 'value':1});
+  $scope.unit = $scope.units[0];
 
   $scope.toggleLatin = function(){
     angular.forEach($scope.exercises, function(v, k) {
@@ -53,6 +55,7 @@ function($scope, localStorageService, $http, $location, $route, $sce) {
   //문제는 질문과 보기, 답으로 이루어져 있다.
   $scope.$on('$viewContentLoaded', function() {
     initUnit();
+    $scope.drawList();
   });
 
   //정답확인.
@@ -69,7 +72,7 @@ function($scope, localStorageService, $http, $location, $route, $sce) {
         $scope.exercises = response;
         //보이는거초기화.
         $scope.showLatin = true;
-        $scope.showEnglish = true;        
+        $scope.showEnglish = true;
         $scope.toggleEnglish();
       });
   };

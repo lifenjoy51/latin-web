@@ -98,8 +98,7 @@ function($scope, localStorageService, $http, $location, $route, $sce) {
     })
     .error(function(data, status, headers, config) {
       //에러나면 강제로 재등록.
-      localStorageService.set('userId', null);
-      $location.path('/');
+      alert('error... T_T');
     });;
 
   }

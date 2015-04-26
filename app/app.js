@@ -51,6 +51,12 @@ function($scope, localStorageService, $location, $http, $window) {
     $scope.regist();
   }else{
     //console.log('else');
+    $http.get('http://106.186.121.86:8080/api/v1/register',
+      {params:{
+        'userId' : userId
+      }}
+    );
+    
     $location.path('/quiz');
   }
 
