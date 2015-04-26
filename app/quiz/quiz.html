@@ -17,7 +17,7 @@
         <input ng-model="toggleAutoplay" type="checkbox"
                 ng-init="toggleAutoplay=false"><span>자동재생</span></input>
         <input ng-model="toggleInverse" type="checkbox"
-        ng-init="toggleInverse=false"><span>거꾸로</span></input>
+        ng-init="toggleInverse=false" ng-change="hideProblem(); nextProblem('')"><span>거꾸로</span></input>
       </div>
       <div class="td hide">
         <div class="score">
@@ -27,8 +27,8 @@
     </div>
   </div>
   <div class="word-question">
-    <p ng-show="toggleInverse">{{question.answer.english}} {{question.answer.korean}}</p>
-    <p ng-show="!toggleInverse">{{question.answer.latin}}</p>
+    <p ng-cloak ng-show="toggleInverse">{{question.answer.english}} {{question.answer.korean}}</p>
+    <p ng-cloak ng-show="!toggleInverse">{{question.answer.latin}}</p>
     <!--<p ng-show="question.answer.meaning != null">{{question.answer.meaning}}</p>-->
   </div>
   <div class="word-info">

@@ -138,6 +138,15 @@ function($scope, localStorageService, $http, $location, $route, $sce) {
     }
   });
 
+  //inverse 할 때 깜박임 방지.
+  $scope.hideProblem = function(){
+    $scope.question = {
+        answer : {}
+      , choices : {}
+      , info : {}
+    };
+  }
+
 }])
 .run(['$rootScope','$templateCache',function($rootScope, $templateCache) {
   $rootScope.$on('$routeChangeStart', function(event, next, current) {
