@@ -16,14 +16,14 @@ angular.module('latinApp.word', [
   localStorageServiceProvider.setPrefix('latinApp');
 }])
 
-.controller('wordCtrl', ['$scope', 'localStorageService', '$http', '$location', '$route', '$sce',
-function($scope, localStorageService, $http, $location, $route, $sce) {
+.controller('wordCtrl', ['$scope', 'localStorageService', '$http', '$location', '$route', '$sce', '$timeout',
+function($scope, localStorageService, $http, $location, $route, $sce, $timeout) {
 
   //저장된 유저아이디.
   var userId = localStorageService.get('userId');
   $scope.units = new Array();
-  //$scope.units.push({'name':'All', 'value':1});
-  //$scope.unit = $scope.units[0];
+  $scope.units.push({'name':'-', 'value':1});
+  $scope.unit = $scope.units[0];
   $scope.audioUrl = '';
   $scope.played=false;
 
@@ -32,18 +32,21 @@ function($scope, localStorageService, $http, $location, $route, $sce) {
   $scope.pos = 0;
   $scope.total = 0;
 
+  var promise;
+
   //문제와 정답이 함께 들어가 있다.
   //문제는 질문과 보기, 답으로 이루어져 있다.
   $scope.$on('$viewContentLoaded', function() {
       initUnit();
       initAudioEvent();
+      $scope.initWords();
   });
 
   //audio
   $scope.getAudioUrl = function(){
     var url = 'http://word.tarpan.us/files/audio/' + $scope.word.audio;
     if(!$scope.word.audio){
-      url = 'http://api.tarpan.us/tts?q='+$scope.word.latin;
+      url = 'http://api.tarpan.us/tts?q='+$scope.word.titleWord;
     }
     $scope.audioUrl = url;
     //console.log(url);
@@ -52,14 +55,27 @@ function($scope, localStorageService, $http, $location, $route, $sce) {
 
   //다음문제를불러온다.
   $scope.next = function(){
-    console.log($scope.pos);
-    console.log($scope.words.length);
-    console.log($scope.word);
+    //console.log($scope.pos);
+    //console.log($scope.words.length);
+    //console.log($scope.word);
     $scope.pos = ($scope.pos+1) % $scope.words.length;
     $scope.word = $scope.words[$scope.pos];
     if($scope.pos == 0){
       $scope.total += 1;
       $scope.initWords();
+    }
+
+    //자동넘어가기.
+    $timeout.cancel(promise); //이전삭제.
+
+    if($scope.toggleAutoNext){
+      if(!$scope.toggleAutoplay){
+        promise = $timeout(function() {
+          //do next
+          console.log('do next.');
+          $scope.next();
+        }, (+$scope.delaySecond)); // delay
+      }
     }
   }
 
@@ -118,6 +134,37 @@ function($scope, localStorageService, $http, $location, $route, $sce) {
       alert('음성 재생은 데이터를 많이 사용합니다. 단어 30개에 1MB 정도.');
     }
   });
+
+  //next..
+  $scope.autoNext = function(){
+
+    var delay = 0;
+    var audio = document.getElementById("audio");
+    var duration = audio.duration;
+    if(!duration) duration = 1;
+    delay = (+duration*1000) + (+$scope.delaySecond);
+
+    //console.log(audio.currentSrc.indexOf($scope.word.audio));
+    //console.log(duration);
+    //console.log(duration*1000);
+    //console.log($scope.delaySecond);
+    //console.log(delay);
+
+    promise = $timeout(function() {
+      //do next
+      console.log('do next. autoNext');
+      $scope.next();
+    }, delay); // delay
+  }
+
+  document.getElementById("audio").oncanplay = function(){
+      console.log('do next. event!!!');
+      if($scope.toggleAutoNext){
+        if($scope.toggleAutoplay){
+          $scope.autoNext();
+        }
+      }
+  }
 
 }])
 .run(['$rootScope','$templateCache',function($rootScope, $templateCache) {

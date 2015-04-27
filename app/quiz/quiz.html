@@ -1,9 +1,9 @@
 <div class="body">
   <div class="word-top table-div">
     <div class="tr">
-      <div class="td hide">
+      <div class="td">
         <div class="level">
-          <span>{{question.info.level}}</span>
+          <span>　　</span>
         </div>
       </div>
       <div class="td middle">
@@ -19,9 +19,9 @@
         <input ng-model="toggleInverse" type="checkbox"
         ng-init="toggleInverse=false" ng-change="hideProblem(); nextProblem('')"><span>거꾸로</span></input>
       </div>
-      <div class="td hide">
+      <div class="td">
         <div class="score">
-          <span>{{question.info.score}} / {{question.info.totalWordCount}}</span>
+          <span>　　</span>
         </div>
       </div>
     </div>
@@ -32,8 +32,8 @@
     <!--<p ng-show="question.answer.meaning != null">{{question.answer.meaning}}</p>-->
   </div>
   <div class="word-info">
-    <!--relation word-->
-    <p ng-show="question.answer.etc != null">[{{question.answer.etc}}]</p>
+    <!--relation word
+    <p ng-show="question.answer.etc != null">[{{question.answer.etc}}]</p>-->
     <!--sound-->
     <audio id="audio" controls preload="none"
     ng-src="{{getAudioUrl()}}">

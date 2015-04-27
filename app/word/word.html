@@ -3,20 +3,33 @@
     <div class="tr">
       <div class="td">
         <div class="level">
-          <span>{{total}}</span>
+          <span>　{{total}}　</span>
         </div>
       </div>
       <div class="td middle">
+
         <select ng-model="unit" ng-options="unit.name for unit in units track by unit.value"
         ng-change="initPos(); initWords()"></select>
-        <input ng-model="toggleAutoplay" type="checkbox"
-                ng-init="toggleAutoplay=false"><span>자동재생</span></input>
+
         <input ng-model="toggleInverse" type="checkbox"
         ng-init="toggleInverse=false"><span>거꾸로</span></input>
+
+        <input ng-model="toggleAutoNext" type="checkbox"
+        ng-init="toggleAutoNext=false"><span>연속보기</span></input>
+
+        <select ng-model="delaySecond" ng-init="delaySecond=3000">
+          <option value="500">0.5초</option>
+          <option value="1000">1초</option>
+          <option value="2000">2초</option>
+          <option value="3000">3초</option>
+          <option value="4000">4초</option>
+          <option value="5000">5초</option>
+        </select>
+
       </div>
       <div class="td">
         <div class="score">
-          <span>{{pos+1}} / {{words.length}}</span>
+          <span>　{{pos+1}} / {{words.length}}　</span>
         </div>
       </div>
     </div>
@@ -32,7 +45,10 @@
     <!--sound-->
     <audio id="audio" controls preload="none"
     ng-src="{{getAudioUrl()}}">
-    </audo>
+    </audio>
+
+    <input ng-model="toggleAutoplay" type="checkbox"
+    ng-init="toggleAutoplay=false"><span>자동재생</span></input>
   </div>
   <div class="word-choices">
     <ul>
