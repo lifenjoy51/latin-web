@@ -14,8 +14,7 @@
           <option value="word">Word</option>
           <option value="sentence">Sentence</option>
         </select>
-        <input ng-model="toggleAutoplay" type="checkbox"
-                ng-init="toggleAutoplay=false"><span>자동재생</span></input>
+
         <input ng-model="toggleInverse" type="checkbox"
         ng-init="toggleInverse=false" ng-change="hideProblem(); nextProblem('')"><span>거꾸로</span></input>
       </div>
@@ -37,7 +36,9 @@
     <!--sound-->
     <audio id="audio" controls preload="none"
     ng-src="{{getAudioUrl()}}">
-    </audo>
+    </audio>
+    <input ng-model="toggleAutoplay" type="checkbox"
+    ng-init="toggleAutoplay=false"><span>자동재생</span></input>
   </div>
   <div class="word-choices">
     <ul>
