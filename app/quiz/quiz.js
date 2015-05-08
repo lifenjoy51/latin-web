@@ -21,13 +21,23 @@ function($scope, localStorageService, $http, $location, $route, $sce) {
 
   //저장된 유저아이디.
   var userId = localStorageService.get('userId');
+  var host = 'http://106.186.121.86:8080';
+  //var host = 'http://192.168.0.10:8080';
 
-  $scope.question = {answer:''};
   $scope.units = new Array();
   $scope.units.push({'name':'All', 'value':0});
   $scope.unit = $scope.units[0];
   $scope.audioUrl = '';
   $scope.played=false;
+
+  $scope.quizzes = new Array();
+  $scope.quiz = {
+    answer : {}
+    , choices : {}
+    , quizType : {}
+  };
+  $scope.pos = 0;
+  $scope.total = 0;
 
   //문제와 정답이 함께 들어가 있다.
   //문제는 질문과 보기, 답으로 이루어져 있다.
@@ -36,8 +46,9 @@ function($scope, localStorageService, $http, $location, $route, $sce) {
     //아니면 메인에서 등록로직 시작.
     if((userId)){
       initUnit();
-      $scope.nextProblem('');
+      //$scope.nextProblem('');
       initAudioEvent();
+      $scope.initWords();
     }else{
       $location.path('/');
     }
@@ -46,11 +57,11 @@ function($scope, localStorageService, $http, $location, $route, $sce) {
   //정답확인.
   $scope.choose = function(data){
     //console.log(data);
-    var answer = $scope.question.answer.latin;
+    var answer = $scope.quiz.answer.latin;
     var correct = answer == data;
     //console.log(correct);
     if(!correct){
-        alert('Erratum!! \n'+ $scope.question.answer.korean +' '+ $scope.question.answer.english);
+        alert('Erratum!! \n\n'+ $scope.quiz.answer.latin +'\n\n'+ $scope.quiz.answer.english);
     }
 
     //점수처리는어떻게하나?
@@ -60,9 +71,9 @@ function($scope, localStorageService, $http, $location, $route, $sce) {
 
   //audio
   $scope.getAudioUrl = function(){
-    var url = 'http://word.tarpan.us/files/audio/' + $scope.question.answer.audio;
-    if(!$scope.question.answer.audio){
-      url = 'http://api.tarpan.us/tts?q='+$scope.question.answer.latin;
+    var url = 'http://word.tarpan.us/files/audio/' + $scope.quiz.answer.audio;
+    if(!$scope.quiz.answer.audio){
+      url = 'http://api.tarpan.us/tts?q='+$scope.quiz.answer.latin;
     }
     $scope.audioUrl = url;
     //console.log(url);
@@ -71,41 +82,38 @@ function($scope, localStorageService, $http, $location, $route, $sce) {
 
   //다음문제를불러온다.
   $scope.nextProblem = function(latin, correctness){
+    $scope.pos = ($scope.pos+1) % $scope.quizzes.length;
+    $scope.quiz = $scope.quizzes[$scope.pos];
+    if($scope.pos == 0){
+      $scope.total += 1;
+      $scope.initWords();
+    }
+
     var score = correctness ? '1' : '-1';
     if($scope.toggleAnswer) score=0;
-    //아이디와... 설정들을가져간다.
-    //TODO 임시데이터.
-    //$http.get('http://'+$location.host()+':8080/next',
-    var quizUrl;
-    if($scope.div == 'word'){  //word
-      quizUrl = 'http://106.186.121.86:8080/api/v1/words/next';
-    } else if($scope.div == 'sentence'){ //sentence
-      quizUrl = 'http://106.186.121.86:8080/api/v1/sentences/next';
-    } else{
-      quizUrl = Math.round(Math.random()) == 0
-      ? 'http://106.186.121.86:8080/api/v1/sentences/next'
-      : 'http://106.186.121.86:8080/api/v1/words/next'
-    }
-    $http.get(quizUrl,
-    {params:{
+
+    //이력저장.
+    var quizUrl = host+'/api/v1/quiz/hist';
+    var data = $.param({
       'userId' : userId,
       'latin' : latin,
       'score' : score,
-      'unit' : $scope.unit.value
-    }})
+      'tp' : $scope.quiz.quizType
+    });
+
+    $http.post(quizUrl, data)
     .success( function(response) {
-      $scope.question = response;
+      console.log(response);
     })
     .error(function(data, status, headers, config) {
-      //에러나면 강제로 재등록.
-      alert('error... T_T');
-    });;
+      //alert('error... T_T');
+      console.log(data);
+    });
 
   }
 
   function initUnit(){
-    //$http.get('http://'+$location.host()+':8080/next',
-    $http.get('http://106.186.121.86:8080/api/v1/units')
+    $http.get(host+'/api/v1/units')
     .success( function(response) {
       for(var i=1; i<response; i++){
         var unit = {
@@ -140,11 +148,35 @@ function($scope, localStorageService, $http, $location, $route, $sce) {
 
   //inverse 할 때 깜박임 방지.
   $scope.hideProblem = function(){
-    $scope.question = {
+    $scope.quiz = {
         answer : {}
       , choices : {}
-      , info : {}
+      , quizType : {}
     };
+  }
+
+  //문제초기화.
+  $scope.initWords = function(){
+
+      var url = host+'/api/v1/quiz/';
+      $http.get(url += $scope.tp,
+    {params:{
+      'userId' : userId,
+      'unit' : $scope.unit.value
+    }})
+    .success( function(response) {
+      console.log(response);
+      $scope.quizzes = response;
+      $scope.quiz = $scope.quizzes[$scope.pos];
+    })
+    .error(function(data, status, headers, config) {
+      //에러나면 강제로 재등록.
+      alert('error... T_T');
+    });;
+  }
+
+  $scope.initPos = function(){
+    $scope.pos=0;
   }
 
 }])

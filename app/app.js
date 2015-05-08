@@ -10,12 +10,15 @@ angular.module('latinApp', [
   'latinApp.version',
   'LocalStorageModule'
 ])
-.config(['$routeProvider','localStorageServiceProvider',
-function($routeProvider, localStorageServiceProvider) {
+.config(['$routeProvider','localStorageServiceProvider', '$httpProvider',
+function($routeProvider, localStorageServiceProvider, $httpProvider) {
   //$routeProvider.otherwise({redirectTo: '/word'});
 
   localStorageServiceProvider
   .setPrefix('latinApp');
+
+  //http post
+  $httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
 }])
 
 .controller('mainCtrl', ['$scope', 'localStorageService','$location', '$http', '$window',
@@ -56,7 +59,7 @@ function($scope, localStorageService, $location, $http, $window) {
         'userId' : userId
       }}
     );
-    
+
     $location.path('/quiz');
   }
 
@@ -80,6 +83,7 @@ function($scope, localStorageService, $location, $http, $window) {
       return ""
     }
   }
+
 }])
 .run(['$rootScope','$templateCache',function($rootScope, $templateCache) {
    $rootScope.$on('$viewContentLoaded', function() {

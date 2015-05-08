@@ -3,16 +3,16 @@
     <div class="tr">
       <div class="td">
         <div class="level">
-          <span>　　</span>
+          <span>{{total}}</span>
         </div>
       </div>
       <div class="td middle">
         <select ng-model="unit" ng-options="unit.name for unit in units track by unit.value"
-        ng-change="nextProblem('')"></select>
-        <select ng-model="div" ng-change="nextProblem('')" ng-init="div='all'">
+        ng-change="initPos(); initWords()"></select>
+        <select ng-model="tp" ng-change="initPos(); initWords()" ng-init="tp='all'">
           <option value="all">Word/Sentence</option>
-          <option value="word">Word</option>
-          <option value="sentence">Sentence</option>
+          <option value="words">Word</option>
+          <option value="sentences">Sentence</option>
         </select>
 
         <input ng-model="toggleInverse" type="checkbox"
@@ -20,14 +20,14 @@
       </div>
       <div class="td">
         <div class="score">
-          <span>　　</span>
+          <span>{{pos+1}} / {{quizzes.length}}</span>
         </div>
       </div>
     </div>
   </div>
   <div class="word-question">
-    <p ng-cloak ng-show="toggleInverse">{{question.answer.english}} {{question.answer.korean}}</p>
-    <p ng-cloak ng-show="!toggleInverse">{{question.answer.latin}}</p>
+    <p ng-cloak ng-show="toggleInverse">{{quiz.answer.english}} {{quiz.answer.korean}}</p>
+    <p ng-cloak ng-show="!toggleInverse">{{quiz.answer.latin}}</p>
     <!--<p ng-show="question.answer.meaning != null">{{question.answer.meaning}}</p>-->
   </div>
   <div class="word-info">
@@ -42,7 +42,7 @@
   </div>
   <div class="word-choices">
     <ul>
-      <li ng-repeat="choice in question.choices">
+      <li ng-repeat="choice in quiz.choices">
         <p ng-click="choose(choice.latin)" ng-show="toggleInverse">{{choice.latin}}</p>
         <p ng-click="choose(choice.latin)" ng-show="!toggleInverse">{{choice.korean}} {{choice.english}}</p>
       </li>
