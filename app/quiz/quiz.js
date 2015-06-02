@@ -21,12 +21,16 @@ function($scope, localStorageService, $http, $location, $route, $sce) {
 
   //저장된 유저아이디.
   var userId = localStorageService.get('userId');
-  var host = 'http://106.186.121.86:8080';
-  //var host = 'http://192.168.0.10:8080';
+  //var host = 'http://106.186.121.86:8080';
+  var host = 'http://192.168.0.10:8080';
 
   $scope.units = new Array();
   $scope.units.push({'name':'All', 'value':0});
   $scope.unit = $scope.units[0];
+  $scope.unitFrom = $scope.units[0];
+  $scope.unitTo = $scope.units[0];
+  $scope.quizSize = 10;
+
   $scope.audioUrl = '';
   $scope.played=false;
 
@@ -38,6 +42,7 @@ function($scope, localStorageService, $http, $location, $route, $sce) {
   };
   $scope.pos = 0;
   $scope.total = 0;
+  $scope.toggleInverse = false;
 
   //문제와 정답이 함께 들어가 있다.
   //문제는 질문과 보기, 답으로 이루어져 있다.
@@ -92,6 +97,10 @@ function($scope, localStorageService, $http, $location, $route, $sce) {
     var score = correctness ? '1' : '-1';
     if($scope.toggleAnswer) score=0;
 
+
+    //문제형식.라틴>영어,영어>라틴.
+    $scope.checkQuizType();
+
     //이력저장.
     var quizUrl = host+'/api/v1/quiz/hist';
     var data = $.param({
@@ -115,13 +124,20 @@ function($scope, localStorageService, $http, $location, $route, $sce) {
   function initUnit(){
     $http.get(host+'/api/v1/units')
     .success( function(response) {
-      for(var i=1; i<response; i++){
+
+      //
+      console.log(response);
+      for(var i in response){
         var unit = {
-          'name' : 'Unit '+i
+          'name' : '#'+i
           ,'value' : i
         };
         $scope.units.push(unit);
       }
+
+      //init
+      $scope.unitFrom = $scope.units[0];
+      $scope.unitTo = $scope.units[0];
     });
   };
 
@@ -162,12 +178,15 @@ function($scope, localStorageService, $http, $location, $route, $sce) {
       $http.get(url += $scope.tp,
     {params:{
       'userId' : userId,
-      'unit' : $scope.unit.value
+      'unitFrom' : $scope.unitFrom.value,
+      'unitTo' : $scope.unitTo.value,
+      'quizSize' : $scope.quizSize
     }})
     .success( function(response) {
       console.log(response);
       $scope.quizzes = response;
       $scope.quiz = $scope.quizzes[$scope.pos];
+      $scope.checkQuizType();
     })
     .error(function(data, status, headers, config) {
       //에러나면 강제로 재등록.
@@ -177,6 +196,18 @@ function($scope, localStorageService, $http, $location, $route, $sce) {
 
   $scope.initPos = function(){
     $scope.pos=0;
+  }
+
+  $scope.checkQuizType = function(){
+
+    //문제형식.라틴>영어,영어>라틴.
+    if($scope.quizType == 'LaEn'){
+      $scope.toggleInverse = false;
+    }else if($scope.quizType == 'EnLa'){
+      $scope.toggleInverse = true;
+    }else{
+      $scope.toggleInverse = (+Math.random())>0 ? true : false;
+    }
   }
 
 }])

@@ -8,15 +8,33 @@
       </div>
       <div class="td middle">
         <select ng-model="unit" ng-options="unit.name for unit in units track by unit.value"
+        ng-change="initPos(); initWords()" style="display:none;"></select>
+        <select ng-model="unitFrom" ng-options="unit.name for unit in units track by unit.value"
+        ng-change="initPos(); initWords(); unitTo=unitFrom"></select>
+        <select ng-model="unitTo" ng-options="unit.name for unit in units track by unit.value"
         ng-change="initPos(); initWords()"></select>
         <select ng-model="tp" ng-change="initPos(); initWords()" ng-init="tp='all'">
-          <option value="all">Word/Sentence</option>
+          <option value="all">All</option>
           <option value="words">Word</option>
-          <option value="sentences">Sentence</option>
+          <option value="sentences">Ex</option>
         </select>
 
-        <input ng-model="toggleInverse" type="checkbox"
-        ng-init="toggleInverse=false" ng-change="hideProblem(); initPos(); initWords()"><span>거꾸로</span></input>
+
+        <select ng-model="quizType" ng-change="hideProblem(); initPos(); initWords()" ng-init="quizType='Random'">
+          <option value="Random">Random</option>
+          <option value="LaEn">Latin>Eng</option>
+          <option value="EnLa">Eng>Latin</option>
+        </select>
+
+        <select ng-model="quizSize" ng-change="hideProblem(); initPos(); initWords()"
+        ng-init="quizSize=10">
+          <option value="0">All</option>
+          <option value="10">10</option>
+          <option value="20">20</option>
+          <option value="30">30</option>
+          <option value="40">40</option>
+        </select>
+
       </div>
       <div class="td">
         <div class="score">
