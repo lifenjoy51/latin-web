@@ -6,6 +6,7 @@
           <span>{{total}}</span>
         </div>
       </div>
+      {{toggleInverse}}
       <div class="td middle">
         <select ng-model="unit" ng-options="unit.name for unit in units track by unit.value"
         ng-change="initPos(); initWords()" style="display:none;"></select>

@@ -21,8 +21,8 @@ function($scope, localStorageService, $http, $location, $route, $sce) {
 
   //저장된 유저아이디.
   var userId = localStorageService.get('userId');
-  var host = 'http://106.186.121.86:8080';
-  //var host = 'http://192.168.0.10:8080';
+  //var host = 'http://106.186.121.86:8080';
+  var host = 'http://192.168.0.10:8080';
 
   $scope.units = new Array();
   $scope.units.push({'name':'All', 'value':0});
@@ -215,7 +215,8 @@ function($scope, localStorageService, $http, $location, $route, $sce) {
     }else if($scope.quizType == 'EnLa'){
       $scope.toggleInverse = true;
     }else{
-      $scope.toggleInverse = (+Math.random())>0 ? true : false;
+      var r = Math.round(Math.random());
+      $scope.toggleInverse = r>0 ? true : false;
     }
   }
 
