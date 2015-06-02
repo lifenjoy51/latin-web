@@ -175,12 +175,20 @@ function($scope, localStorageService, $http, $location, $route, $sce) {
   //문제초기화.
   $scope.initWords = function(){
 
+    //unit 순서확인.
+    var unitFrom = $scope.unitFrom.value;
+    var unitTo = $scope.unitTo.value;
+
+    if(unitTo < unitFrom){
+      unitTo = unitFrom;
+    }
+
       var url = host+'/api/v1/quiz/';
       $http.get(url += $scope.tp,
     {params:{
       'userId' : userId,
-      'unitFrom' : $scope.unitFrom.value,
-      'unitTo' : $scope.unitTo.value,
+      'unitFrom' : unitFrom,
+      'unitTo' : unitTo,
       'quizSize' : $scope.quizSize
     }})
     .success( function(response) {
