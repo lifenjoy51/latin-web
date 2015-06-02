@@ -76,6 +76,7 @@ function($scope, localStorageService, $http, $location, $route, $sce) {
 
   //audio
   $scope.getAudioUrl = function(){
+    if(!$scope.quiz) return;
     var url = 'http://word.tarpan.us/files/audio/' + $scope.quiz.answer.audio;
     if(!$scope.quiz.answer.audio){
       url = 'http://api.tarpan.us/tts?q='+$scope.quiz.answer.latin;
