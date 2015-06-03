@@ -44,6 +44,9 @@ function($scope, localStorageService, $http, $location, $route, $sce) {
   $scope.total = 0;
   $scope.toggleInverse = false;
 
+  //loading
+  $scope.loading = false;
+
   //문제와 정답이 함께 들어가 있다.
   //문제는 질문과 보기, 답으로 이루어져 있다.
   $scope.$on('$viewContentLoaded', function() {
@@ -53,7 +56,7 @@ function($scope, localStorageService, $http, $location, $route, $sce) {
       initUnit();
       //$scope.nextProblem('');
       initAudioEvent();
-      $scope.initWords();
+      $scope.init();
     }else{
       $location.path('/');
     }
@@ -92,7 +95,7 @@ function($scope, localStorageService, $http, $location, $route, $sce) {
     $scope.quiz = $scope.quizzes[$scope.pos];
     if($scope.pos == 0){
       $scope.total += 1;
-      $scope.initWords();
+      $scope.init();
     }
 
     var score = correctness ? '1' : '-1';
@@ -217,6 +220,15 @@ function($scope, localStorageService, $http, $location, $route, $sce) {
     }else{
       var r = Math.round(Math.random());
       $scope.toggleInverse = r>0 ? true : false;
+    }
+  }
+
+  $scope.init = function(){
+    if(!$scope.loading){
+      $scope.loading = true;
+      $scope.initPos();
+      $scope.initWords();
+      $scope.hideProblem();
     }
   }
 

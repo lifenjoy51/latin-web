@@ -6,29 +6,30 @@
           <span>{{total}}</span>
         </div>
       </div>
-      
+
       <div class="td middle">
         <select ng-model="unit" ng-options="unit.name for unit in units track by unit.value"
-        ng-change="initPos(); initWords()" style="display:none;"></select>
+        ng-change="init()" style="display:none;"></select>
         <select ng-model="unitFrom" ng-options="unit.name for unit in units track by unit.value"
-        ng-change="initPos(); initWords(); unitTo=unitFrom"></select>
+        ng-change="init(); unitTo=unitFrom"></select>
         <select ng-model="unitTo" ng-options="unit.name for unit in units track by unit.value"
-        ng-change="initPos(); initWords()"></select>
-        <select ng-model="tp" ng-change="initPos(); initWords()" ng-init="tp='all'">
+        ng-change="init()"></select>
+
+        <select ng-model="tp" ng-change="init()" ng-init="tp='all'">
           <option value="all">All</option>
           <option value="words">Word</option>
           <option value="sentences">Ex</option>
         </select>
 
-
-        <select ng-model="quizType" ng-change="hideProblem(); initPos(); initWords()" ng-init="quizType='Random'">
+        <select ng-model="quizType" ng-change="init()"
+        ng-init="quizType='Random'">
           <option value="Random">Random</option>
           <option value="LaEn">Latin>Eng</option>
           <option value="EnLa">Eng>Latin</option>
         </select>
 
-        <select ng-model="quizSize" ng-change="hideProblem(); initPos(); initWords()"
-        ng-init="quizSize=10">
+        <select ng-model="quizSize" ng-change="init()"
+        ng-init="quizSize='10'">
           <option value="0">All</option>
           <option value="10">10</option>
           <option value="20">20</option>
@@ -67,4 +68,5 @@
       </li>
     </ul>
   </div>
+
 </div>
