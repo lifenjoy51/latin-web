@@ -70,3 +70,22 @@
   </div>
 
 </div>
+
+<script type="text/ng-template" id="myModalContent.html">
+<div class="modal-header">
+  <h3 class="modal-title">{{(quizSize-items.length)/quizSize * 100}}점</h3>
+</div>
+<div class="modal-body">
+  <h4>틀린문제</h4>
+  <ul>
+    <li ng-repeat="item in items">
+      <p>{{ item.latin }}</p>
+      <p>{{ item.english }}</p>
+    </li>
+  </ul>
+</div>
+<div class="modal-footer">
+  <button class="btn btn-primary" ng-click="ok()">OK</button>
+  <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+</div>
+</script>

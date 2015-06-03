@@ -16,13 +16,13 @@ angular.module('latinApp.quiz', [
   localStorageServiceProvider.setPrefix('latinApp');
 }])
 
-.controller('quizCtrl', ['$scope', 'localStorageService', '$http', '$location', '$route', '$sce',
-function($scope, localStorageService, $http, $location, $route, $sce) {
+.controller('quizCtrl', ['$scope', 'localStorageService', '$http', '$location', '$route', '$sce', '$modal',
+function($scope, localStorageService, $http, $location, $route, $sce, $modal) {
 
   //저장된 유저아이디.
   var userId = localStorageService.get('userId');
-  //var host = 'http://106.186.121.86:8080';
-  var host = 'http://192.168.0.10:8080';
+  var host = 'http://106.186.121.86:8080';
+  //var host = 'http://192.168.0.10:8080';
 
   $scope.units = new Array();
   $scope.units.push({'name':'All', 'value':0});
@@ -43,6 +43,7 @@ function($scope, localStorageService, $http, $location, $route, $sce) {
   $scope.pos = 0;
   $scope.total = 0;
   $scope.toggleInverse = false;
+  $scope.wrongAnswers = new Array();
 
   //loading
   $scope.loading = false;
@@ -70,6 +71,7 @@ function($scope, localStorageService, $http, $location, $route, $sce) {
     //console.log(correct);
     if(!correct){
         alert('Erratum!! \n\n'+ $scope.quiz.answer.latin +'\n\n'+ $scope.quiz.answer.english);
+        $scope.wrongAnswers.push($scope.quiz.answer);
     }
 
     //점수처리는어떻게하나?
@@ -94,12 +96,13 @@ function($scope, localStorageService, $http, $location, $route, $sce) {
     $scope.pos = ($scope.pos+1) % $scope.quizzes.length;
     $scope.quiz = $scope.quizzes[$scope.pos];
     if($scope.pos == 0){
+      $scope.modal();
       $scope.total += 1;
+      $scope.wrongAnswers = new Array();
       $scope.init();
     }
 
     var score = correctness ? '1' : '-1';
-    if($scope.toggleAnswer) score=0;
 
 
     //문제형식.라틴>영어,영어>라틴.
@@ -199,6 +202,8 @@ function($scope, localStorageService, $http, $location, $route, $sce) {
       $scope.quizzes = response;
       $scope.quiz = $scope.quizzes[$scope.pos];
       $scope.checkQuizType();
+      //load check.
+      $scope.loading = false;
     })
     .error(function(data, status, headers, config) {
       //에러나면 강제로 재등록.
@@ -226,10 +231,28 @@ function($scope, localStorageService, $http, $location, $route, $sce) {
   $scope.init = function(){
     if(!$scope.loading){
       $scope.loading = true;
+      $scope.hideProblem();
       $scope.initPos();
       $scope.initWords();
-      $scope.hideProblem();
     }
+  }
+
+  $scope.modal = function(){
+    var modalInstance = $modal.open({
+      animation: true,
+      templateUrl: 'myModalContent.html',
+      controller: 'ModalInstanceCtrl',
+      size: '',
+      resolve: {
+        //모달에넘김.
+        items: function () {
+          return $scope.wrongAnswers;
+        }
+        ,quizSize: function () {
+          return $scope.quizSize;
+        }
+      }
+    });
   }
 
 }])
@@ -240,4 +263,22 @@ function($scope, localStorageService, $http, $location, $route, $sce) {
     }
   });
 }]);
-;
+
+
+
+// Please note that $modalInstance represents a modal window (instance) dependency.
+// It is not the same as the $modal service used above.
+
+angular.module('latinApp').controller('ModalInstanceCtrl', function ($scope, $modalInstance, items, quizSize) {
+
+  $scope.items = items;
+  $scope.quizSize = quizSize;
+
+  $scope.ok = function () {
+    $modalInstance.close();
+  };
+
+  $scope.cancel = function () {
+    $modalInstance.dismiss('cancel');
+  };
+});

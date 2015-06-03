@@ -8,11 +8,12 @@ angular.module('latinApp', [
   'latinApp.converter',
   'latinApp.exercise',
   'latinApp.version',
-  'LocalStorageModule'
+  'LocalStorageModule',
+  'ui.bootstrap'
 ])
 .config(['$routeProvider','localStorageServiceProvider', '$httpProvider',
 function($routeProvider, localStorageServiceProvider, $httpProvider) {
-  //$routeProvider.otherwise({redirectTo: '/word'});
+  $routeProvider.otherwise({redirectTo: '/quiz'});
 
   localStorageServiceProvider
   .setPrefix('latinApp');
@@ -87,6 +88,7 @@ function($scope, localStorageService, $location, $http, $window) {
 }])
 .run(['$rootScope','$templateCache',function($rootScope, $templateCache) {
    $rootScope.$on('$viewContentLoaded', function() {
-      $templateCache.removeAll();
+     //remove for template script error.
+      //$templateCache.removeAll();
    });
 }]);
