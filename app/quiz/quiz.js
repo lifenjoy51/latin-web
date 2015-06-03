@@ -96,11 +96,11 @@ function($scope, localStorageService, $http, $location, $route, $sce, $modal) {
     $scope.pos = ($scope.pos+1) % $scope.quizzes.length;
     $scope.quiz = $scope.quizzes[$scope.pos];
     if($scope.pos == 0){
-      $scope.modal();
       $scope.total += 1;
       $scope.wrongAnswers = new Array();
       $scope.init();
     }
+    $scope.modal();
 
     var score = correctness ? '1' : '-1';
 
@@ -268,8 +268,9 @@ function($scope, localStorageService, $http, $location, $route, $sce, $modal) {
 
 // Please note that $modalInstance represents a modal window (instance) dependency.
 // It is not the same as the $modal service used above.
-
-angular.module('latinApp').controller('ModalInstanceCtrl', function ($scope, $modalInstance, items, quizSize) {
+angular.module('latinApp').controller('ModalInstanceCtrl'
+, ['$scope', '$modalInstance', 'items', 'quizSize'
+, function ($scope, $modalInstance, items, quizSize) {
 
   $scope.items = items;
   $scope.quizSize = quizSize;
@@ -281,4 +282,4 @@ angular.module('latinApp').controller('ModalInstanceCtrl', function ($scope, $mo
   $scope.cancel = function () {
     $modalInstance.dismiss('cancel');
   };
-});
+}]);
