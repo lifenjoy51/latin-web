@@ -95,12 +95,13 @@ function($scope, localStorageService, $http, $location, $route, $sce, $modal) {
   $scope.nextProblem = function(latin, correctness){
     $scope.pos = ($scope.pos+1) % $scope.quizzes.length;
     $scope.quiz = $scope.quizzes[$scope.pos];
+    var tp = $scope.quiz.quizType;
     if($scope.pos == 0){
+      $scope.modal();
       $scope.total += 1;
       $scope.wrongAnswers = new Array();
       $scope.init();
     }
-    $scope.modal();
 
     var score = correctness ? '1' : '-1';
 
@@ -114,7 +115,7 @@ function($scope, localStorageService, $http, $location, $route, $sce, $modal) {
       'userId' : userId,
       'latin' : latin,
       'score' : score,
-      'tp' : $scope.quiz.quizType
+      'tp' : tp
     });
 
     $http.post(quizUrl, data)
