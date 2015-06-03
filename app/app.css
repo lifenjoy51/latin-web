@@ -72,6 +72,10 @@
   margin:auto;
 }
 
+.word-options{
+  margin: 10pt 0 0 0;
+}
+
 div.word-question{
   background-color : #006600;
   color: #EEEEEE;

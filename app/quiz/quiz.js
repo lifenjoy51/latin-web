@@ -137,7 +137,7 @@ function($scope, localStorageService, $http, $location, $route, $sce, $modal) {
       console.log(response);
       for(var i in response){
         var unit = {
-          'name' : '#'+i
+          'name' : 'Unit '+i
           ,'value' : i
         };
         $scope.units.push(unit);
