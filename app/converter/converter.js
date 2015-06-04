@@ -22,7 +22,8 @@ function($scope, localStorageService, $http, $location) {
 
     //점수처리는어떻게하나?
     $http({
-      headers:{'Content-Type':'application/x-www-form-urlencoded'},
+      headers:{'Content-Type':'application/x-www-form-urlencoded'
+      ,'Accept' : 'text/plain'},
       url:'http://106.186.121.86:8080/api/v1/convert',
       method:'POST',
       params:{
@@ -30,6 +31,7 @@ function($scope, localStorageService, $http, $location) {
       }
     })
     .success( function(response) {
+      console.log(response);
       $scope.srcText = response;
     });
 
