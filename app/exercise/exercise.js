@@ -78,12 +78,11 @@ function($scope, localStorageService, $http, $location, $route, $sce) {
   };
 
 
-
   function initUnit(){
     //$http.get('http://'+$location.host()+':8080/next',
     $http.get('http://106.186.121.86:8080/api/v1/units')
     .success( function(response) {
-      for(var i=1; i<response; i++){
+      for(var i in response){
         var unit = {
           'name' : 'Unit '+i
           ,'value' : i
